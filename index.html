@@ -73,7 +73,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css"
     />
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="./css/style.css" rel="stylesheet" type="text/css" />
 
     <!-- KaTeX -->
     <link
@@ -94,6 +94,21 @@
       integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
       crossorigin="anonymous"
     ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      async
+      src="https://unpkg.com/es-module-shims@1.6.2/dist/es-module-shims.js"
+    ></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "./three/build/three.module.js",
+          "lil-gui": "./three/examples/jsm/libs/lil-gui.module.min.js",
+          "orbit-controls": "./three/examples/jsm/controls/OrbitControls.js"
+        }
+      }
+    </script>
+    <script defer type="module" src="./js/main.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         renderMathInElement(document.body, {
@@ -205,7 +220,7 @@
 
     <section>
       <h2>Overview</h2>
-      <p>
+      <p style="text-align: justify">
         Legged machines are becoming increasingly agile and adaptive but they
         have so far lacked the basic reconfigurability of legged animals, which
         have been rearranged and reshaped to fill millions of niches. Unlike
@@ -225,6 +240,16 @@
         efficiently explored, revealing a wide diversity of novel legged forms.
       </p>
     </section>
+
+    <section>
+      <h2>Mojoco</h2>
+      <div id="mujoco-container">
+        <div id="mujoco">
+          <div id="mujoco-controls"></div>
+        </div>
+      </div>
+    </section>
+
     <section>
       <h2>Videos</h2>
       <div
