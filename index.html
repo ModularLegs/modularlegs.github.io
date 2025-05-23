@@ -73,7 +73,13 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css"
     />
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="./css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Michroma&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- KaTeX -->
     <link
@@ -94,6 +100,23 @@
       integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
       crossorigin="anonymous"
     ></script>
+
+    <!-- REMOVE MUJOCO -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      async
+      src="https://unpkg.com/es-module-shims@1.6.2/dist/es-module-shims.js"
+    ></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "./three/build/three.module.js",
+          "lil-gui": "./three/examples/jsm/libs/lil-gui.module.min.js",
+          "orbit-controls": "./three/examples/jsm/controls/OrbitControls.js"
+        }
+      }
+    </script>
+    <script defer type="module" src="./js/main.js"></script> -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         renderMathInElement(document.body, {
@@ -110,205 +133,207 @@
         });
       });
     </script>
+    <script>
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 10);
+      });
+    </script>
   </head>
 
   <body>
-    <h1 style="font-family: Lato; margin: 0.25em 0">
-      Reconfigurable Legged Metamachines that Run on Autonomous Modular Legs
-    </h1>
-
-    <div style="height: 1em"></div>
-
-    <!-- Authors -->
-    <div
-      style="
-        display: flex;
-        flex-wrap: wrap;
-        text-align: center;
-        justify-content: center;
-        gap: 0.4em 1.25em;
-        max-width: 32em;
-        margin: 0 auto;
-        font-weight: 600;
-        color: #666;
-      "
-    >
-      <!-- To update authors' links -->
-      <div>
-        Chen Yu<sup>1, *</sup>
-        <div style="width: 1em; display: inline-block"></div>
-        David Matthews<sup>1, *</sup>
-        <div style="width: 1em; display: inline-block"></div>
-        Jingxian Wang<sup>1, *</sup>
-        <div style="width: 1em; display: inline-block"></div>
-        Jing Gu<sup>1</sup>
-      </div>
-      <div>
-        <div style="width: 1em; display: inline-block"></div>
-        Douglas Blackiston<sup>2, 3</sup>
-        <div style="width: 1em; display: inline-block"></div>
-        Michael Rubenstein<sup>1</sup>
-      </div>
-      <div>
-        <div style="width: 1em; display: inline-block"></div>
-        Sam Kriegman<sup>1</sup>
-      </div>
-    </div>
-
-    <div style="height: 1em"></div>
-
-    <!-- Affiliations -->
-    <div
-      style="
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        text-align: center;
-        justify-content: center;
-        gap: 0.4em 1.25em;
-        margin: 0 auto;
-        font-weight: 400;
-      "
-    >
-      <div>
-        <sup>1</sup>Center for Robotics and Biosystems, Northwestern University
-      </div>
-      <div><sup>2</sup>Dept. of Biology, Tufts University</div>
-      <div>
-        <sup>3</sup>Wyss Institute for Biologically Inspired Engineering,
-        Harvard University
-      </div>
-      <div><sup>*</sup>Co-first author</div>
-    </div>
-    <div style="height: 1em"></div>
-
-    <!-- Links -->
-    <div style="display: flex; justify-content: center; flex-wrap: wrap">
-      <a href="https://arxiv.org/abs/2505.00784" target="_blank">
-        <button style="min-width: 12em">
-          <i class="ti ti-article"></i>
-          arXiv
-        </button>
-      </a>
-    </div>
-
-    <!-- tldr -->
-    <p style="text-align: center">
-      <strong>TLDR</strong>
-      <em>
-        By combining different arrangements of minimal yet athletic agents into
-        a unified body, <br />
-        a diversity of agile legged metamachines were realized.
-      </em>
-    </p>
-    <div style="height: 1em"></div>
-
-    <section>
-      <h2>Overview</h2>
-      <p>
-        Legged machines are becoming increasingly agile and adaptive but they
-        have so far lacked the basic reconfigurability of legged animals, which
-        have been rearranged and reshaped to fill millions of niches. Unlike
-        their biological counterparts, legged machines have largely converged
-        over the past decade to canonical quadrupedal and bipedal architectures
-        that cannot be easily reconfigured to meet new tasks or recover from
-        injury. Here we introduce autonomous modular legs: agile yet minimal,
-        single-degree-of-freedom jointed links that can learn complex dynamic
-        behaviors and may be freely attached to form legged metamachines at the
-        meter scale. This enables rapid repair, redesign, and recombination of
-        highly-dynamic modular agents that move quickly and acrobatically
-        (non-quasistatically) through unstructured environments. Because each
-        module is itself a complete agent, legged metamachines are able to
-        sustain deep structural damage that would completely disable other
-        legged robots. We also show how to encode the vast space of possible
-        body configurations into a compact latent design genome that can be
-        efficiently explored, revealing a wide diversity of novel legged forms.
-      </p>
-    </section>
-    <section>
-      <h2>Videos</h2>
-      <div
-        style="
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 1em;
-        "
+    <header id="video-preface">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="none"
+        poster="assets/intro-placeholder.jpg"
+        id="preface-video"
       >
-        <!-- Video 1 -->
-        <div
-          style="
-            position: relative;
-            width: 100%;
-            max-width: 672px;
-            padding-top: 56.25%;
-          "
-        >
-          <iframe
-            src="https://www.youtube.com/embed/8VKSx1zSg7Q?si=Wkl-5J-D-3gaL8wr"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-            style="
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-            "
-          ></iframe>
-        </div>
-        <figcaption style="font-size: 0.8em; text-align: center">
-          <strong> Metamachines in the wild.</strong> Reconfigurable legged
-          metamachines behave autonomously across sand, mud, grass, tree roots,
-          plant litter, mulch, gravel, bricks, concrete, and combinations
-          thereof.
-        </figcaption>
-
-        <div style="height: 1em"></div>
-        <!-- Video 2 -->
-        <div
-          style="
-            position: relative;
-            width: 100%;
-            max-width: 672px;
-            padding-top: 56.25%;
-          "
-        >
-          <iframe
-            src="https://www.youtube.com/embed/y_A8MKdEB9A?si=atlWulSAofo1QoFH"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-            style="
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-            "
-          ></iframe>
-        </div>
-        <figcaption style="font-size: 0.8em; text-align: center">
-          <strong>Acrobatic behaviors and resilience to damage.</strong>
-          Reconfigurable metamachines behave, resist adversarial perturbations,
-          and adapt to damage. Control policies use internal sensing only;
-          motion capture was not supplied to the policy, it is used only for the
-          behavioral analyses.
-        </figcaption>
+        <source src="assets/fastout.mp4" type="video/mp4" />
+      </video>
+      <div class="overlay">
+        <h1 class="title">
+          Reconfigurable Legged Metamachines that <br />
+          Running on Autonomous Modular Legs
+        </h1>
       </div>
-    </section>
-    <section>
-      <p style="text-align: center; font-size: x-small; color: lightgrey;">
-        This website was heavily inspired by
-        <a href="https://kzakka.com/robopianist/" style="color: lightgrey;"> Kevin Zakka's</a>.
+    </header>
+    <main id="main-content">
+      <h1 style="font-family: Lato; margin: 0.25em 0">
+        Reconfigurable Legged Metamachines that <br />
+        Run on Autonomous Modular Legs
+      </h1>
+
+      <div style="height: 1em"></div>
+
+      <!-- Authors -->
+      <div id="authors">
+        <!-- To update authors' links -->
+        <div>
+          Chen Yu<sup>1, *</sup>
+          <div style="width: 1em; display: inline-block"></div>
+          David Matthews<sup>1, *</sup>
+          <div style="width: 1em; display: inline-block"></div>
+          Jingxian Wang<sup>1, *</sup>
+          <div style="width: 1em; display: inline-block"></div>
+          Jing Gu<sup>1</sup>
+        </div>
+        <div>
+          <div style="width: 1em; display: inline-block"></div>
+          Douglas Blackiston<sup>2, 3</sup>
+          <div style="width: 1em; display: inline-block"></div>
+          Michael Rubenstein<sup>1</sup>
+        </div>
+        <div>
+          <div style="width: 1em; display: inline-block"></div>
+          Sam Kriegman<sup>1</sup>
+        </div>
+      </div>
+
+      <div style="height: 1em"></div>
+
+      <!-- Affiliations -->
+      <div id="affiliations">
+        <div>
+          <sup>1</sup>Center for Robotics and Biosystems, Northwestern
+          University
+        </div>
+        <div><sup>2</sup>Dept. of Biology, Tufts University</div>
+        <div>
+          <sup>3</sup>Wyss Institute for Biologically Inspired Engineering,
+          Harvard University
+        </div>
+        <div><sup>*</sup>Co-first author</div>
+      </div>
+      <div style="height: 1em"></div>
+
+      <!-- Links -->
+      <div id="links">
+        <a href="https://arxiv.org/abs/2505.00784" target="_blank">
+          <button style="min-width: 12em">
+            <i class="ti ti-article"></i>
+            arXiv
+          </button>
+        </a>
+        <a href="https://github.com/Chenaah/modular_legs" target="_blank">
+          <button style="min-width: 12em">
+            <i class="ti ti-brand-github"></i>
+            Code
+          </button>
+        </a>
+      </div>
+
+      <!-- tldr -->
+      <p style="text-align: center">
+        <strong>TLDR</strong>
+        <em>
+          By combining different arrangements of minimal yet athletic agents
+          into a unified body, <br />
+          a diversity of agile legged metamachines were realized.
+        </em>
       </p>
-    </section>
+      <div style="height: 1em"></div>
+
+      <section>
+        <h2>Overview</h2>
+        <p style="text-align: justify">
+          Legged machines are becoming increasingly agile and adaptive but they
+          have so far lacked the basic reconfigurability of legged animals,
+          which have been rearranged and reshaped to fill millions of niches.
+          Unlike their biological counterparts, legged machines have largely
+          converged over the past decade to canonical quadrupedal and bipedal
+          architectures that cannot be easily reconfigured to meet new tasks or
+          recover from injury. Here we introduce autonomous modular legs: agile
+          yet minimal, single-degree-of-freedom jointed links that can learn
+          complex dynamic behaviors and may be freely attached to form legged
+          metamachines at the meter scale. This enables rapid repair, redesign,
+          and recombination of highly-dynamic modular agents that move quickly
+          and acrobatically (non-quasistatically) through unstructured
+          environments. Because each module is itself a complete agent, legged
+          metamachines are able to sustain deep structural damage that would
+          completely disable other legged robots. We also show how to encode the
+          vast space of possible body configurations into a compact latent
+          design genome that can be efficiently explored, revealing a wide
+          diversity of novel legged forms.
+        </p>
+      </section>
+
+      <!-- REMOVE MUJOCO -->
+      <!-- <section>
+        <h2>Mojoco</h2>
+        <div id="mujoco-container">
+          <div id="mujoco">
+            <div id="mujoco-controls"></div>
+          </div>
+        </div>
+      </section> -->
+
+      <section>
+        <h2>Videos</h2>
+        <div>
+          <!-- Video 1 -->
+          <div class="video-container">
+            <iframe
+              src="https://www.youtube.com/embed/8VKSx1zSg7Q?si=Wkl-5J-D-3gaL8wr"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <figcaption style="font-size: 0.8em; text-align: center">
+            <strong> Metamachines in the wild.</strong> Reconfigurable legged
+            metamachines behave autonomously across sand, mud, grass, tree
+            roots, plant litter, mulch, gravel, bricks, concrete, and
+            combinations thereof.
+          </figcaption>
+
+          <div style="height: 1em"></div>
+          <!-- Video 2 -->
+          <div class="video-container">
+            <iframe
+              src="https://www.youtube.com/embed/y_A8MKdEB9A?si=atlWulSAofo1QoFH"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <figcaption style="font-size: 0.8em; text-align: center">
+            <strong>Acrobatic behaviors and resilience to damage.</strong>
+            Reconfigurable metamachines behave, resist adversarial
+            perturbations, and adapt to damage. Control policies use internal
+            sensing only; motion capture was not supplied to the policy, it is
+            used only for the behavioral analyses.
+          </figcaption>
+        </div>
+      </section>
+      <section>
+        <p style="text-align: center; font-size: small">
+          This website was heavily inspired by
+          <a href="https://kzakka.com/robopianist/"> Kevin Zakka's</a>.
+        </p>
+      </section>
+    </main>
+    <script>
+      window.addEventListener("scroll", function () {
+        const preface = document.getElementById("video-preface");
+        if (window.scrollY > window.innerHeight * 0.1) {
+          preface.classList.add("hidden");
+        } else {
+          preface.classList.remove("hidden");
+        }
+      });
+    </script>
   </body>
 </html>

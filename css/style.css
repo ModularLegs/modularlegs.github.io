@@ -1,0 +1,272 @@
+body > main {
+  min-height: 100%;
+  background-color: #fff;
+  font-family: "Open Sans", sans-serif;
+  color: #333;
+  margin: 0 auto;
+  padding: 2em 2em;
+  box-sizing: border-box;
+  line-height: 1.5em;
+}
+/* 初始 header 样式 */
+#video-preface {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  transition: height 1s ease, opacity 1s ease;
+}
+
+#preface-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: Lato, sans-serif;
+  z-index: 1;
+}
+
+/* 滚动后添加的类：视频直接折叠+淡出 */
+#video-preface.hidden {
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+h1 {
+  font-size: 2em;
+  text-align: center;
+  line-height: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.title {
+  font-size: 2em;
+  font-family: "Michroma", sans-serif;
+  text-align: center;
+  line-height: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  font-size: 1.3em;
+  text-align: center;
+  font-weight: 600;
+}
+
+a,
+a:link,
+a:visited {
+  color: inherit;
+}
+
+section {
+  padding-bottom: 1em;
+  max-width: 50em;
+  margin: 0 auto;
+}
+
+p {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: justify;
+}
+
+button {
+  background: #fff;
+  border-radius: 0.5em;
+  border: 1.5px solid #333;
+  padding: 0.5em 2em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#tilted-method,
+#tilted-method-narrow {
+  display: block;
+  margin: 0 auto;
+  width: 70em;
+  max-width: 100%;
+}
+#tilted-method-narrow {
+  display: none;
+}
+#tilted-method-very-narrow {
+  display: none;
+}
+
+@media screen and (max-width: 800px) {
+  #tilted-method {
+    display: none;
+  }
+  #tilted-method-narrow {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #tilted-method-narrow {
+    display: none;
+  }
+  #tilted-method-very-narrow {
+    display: block;
+  }
+}
+
+.square-container {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 0.5em 1em;
+  position: relative;
+  vertical-align: middle;
+}
+
+@media screen and (max-width: 800px) {
+  .square-container > div:nth-child(1) {
+    font-size: 0.75em;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .square-container {
+    flex-wrap: wrap;
+  }
+  .square-container > div:nth-child(1) {
+    font-size: 0.65em;
+  }
+  .square-container > div:nth-child(2) {
+    width: 18em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .square-container > div:nth-child(1) {
+    font-size: 0.375em;
+  }
+}
+
+/* Children are (matrices/LaTeX, text). */
+.square-container > div:nth-child(1) {
+  vertical-align: middle;
+  text-align: center;
+  text-wrap: nowrap;
+}
+
+.square-container > div:nth-child(1) > * {
+  vertical-align: middle;
+}
+
+.square-container > div:nth-child(2) {
+  text-align: left;
+}
+
+/* Math */
+@media screen and (max-width: 640px) {
+  .katex-display {
+    font-size: 0.875em;
+  }
+}
+@media screen and (max-width: 480px) {
+  .katex-display {
+    font-size: 0.75em;
+  }
+}
+
+#authors {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
+  gap: 0.4em 1.25em;
+  max-width: 32em;
+  margin: 0 auto;
+  font-weight: 600;
+  color: #666;
+}
+
+#affiliations {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
+  gap: 0.4em 1.25em;
+  margin: 0 auto;
+  font-weight: 400;
+}
+
+#links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+/* Center the MuJoCo container with 16:9 ratio */
+#mujoco-container {
+  position: relative;
+  width: 100%;
+  max-width: 672px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* MuJoCo simulator within the container */
+#mujoco {
+  position: relative;
+  width: 100%;
+  max-width: 672px;
+}
+
+/* Floating Control Panel (top-right corner) */
+#mujoco-controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+/* Video section for consistent layout */
+section > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  max-width: 672px;
+  margin: 0 auto;
+}
+
+/* Video element */
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 672px;
+  padding-top: 56.25%;
+}
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
