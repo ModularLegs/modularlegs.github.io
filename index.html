@@ -162,11 +162,13 @@
       <div class="overlay">
         <h1 class="title">
           Reconfigurable Legged Metamachines that <br />
-          Running on Autonomous Modular Legs
+          Run on Autonomous Modular Legs
         </h1>
       </div>
     </header>
     <main id="main-content">
+      <div class="fade-transition"></div>
+      <div style="height: 5em"></div>
       <h1 style="font-family: Lato; margin: 0.25em 0">
         Reconfigurable Legged Metamachines that <br />
         Run on Autonomous Modular Legs
@@ -277,7 +279,7 @@
       </section> -->
 
       <section>
-        <h2>Videos</h2>
+        <h2>Metamachines in the wild</h2>
         <div>
           <!-- Video 1 -->
           <div class="video-container">
@@ -290,14 +292,16 @@
               allowfullscreen
             ></iframe>
           </div>
-          <figcaption style="font-size: 0.8em; text-align: center">
-            <strong> Metamachines in the wild.</strong> Reconfigurable legged
-            metamachines behave autonomously across sand, mud, grass, tree
-            roots, plant litter, mulch, gravel, bricks, concrete, and
-            combinations thereof.
+          <figcaption>
+            Reconfigurable legged metamachines behave autonomously across sand,
+            mud, grass, tree roots, plant litter, mulch, gravel, bricks,
+            concrete, and combinations thereof.
           </figcaption>
+        </div>
 
-          <div style="height: 1em"></div>
+        <div style="height: 3em"></div>
+        <h2>Acrobatic behaviors and resilience to damage</h2>
+        <div>
           <!-- Video 2 -->
           <div class="video-container">
             <iframe
@@ -309,8 +313,7 @@
               allowfullscreen
             ></iframe>
           </div>
-          <figcaption style="font-size: 0.8em; text-align: center">
-            <strong>Acrobatic behaviors and resilience to damage.</strong>
+          <figcaption>
             Reconfigurable metamachines behave, resist adversarial
             perturbations, and adapt to damage. Control policies use internal
             sensing only; motion capture was not supplied to the policy, it is
@@ -318,19 +321,22 @@
           </figcaption>
         </div>
       </section>
-      <section>
-        <p style="text-align: center; font-size: small">
-          This website was heavily inspired by
-          <a href="https://kzakka.com/robopianist/"> Kevin Zakka's</a>.
-        </p>
-      </section>
+      <div style="height: 3em"></div>
     </main>
     <script>
       window.addEventListener("scroll", function () {
         const preface = document.getElementById("video-preface");
-        if (window.scrollY > window.innerHeight * 0.1) {
+        if (
+          window.scrollY > window.innerHeight * 0.1 &&
+          !preface.classList.contains("hidden")
+        ) {
           preface.classList.add("hidden");
-        } else {
+          setTimeout(() => {
+            main.scrollIntoView({ behavior: "smooth" });
+          });
+        }
+
+        if (window.scrollY < 10 && preface.classList.contains("hidden")) {
           preface.classList.remove("hidden");
         }
       });

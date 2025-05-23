@@ -80,7 +80,7 @@ export class MuJoCoDemo {
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.renderer.setPixelRatio(window.devicePixelRatio);
     // Set renderer size to maintain 16:9 ratio within the container
-    this.renderer.setSize(672, (672 * 9) / 16);
+    this.renderer.setSize(800, (800 * 9) / 16);
     this.renderer.domElement.style.width = "100%";
     this.renderer.domElement.style.height = "100%";
 
@@ -127,7 +127,7 @@ export class MuJoCoDemo {
 
   onWindowResize() {
     const container = document.getElementById("mujoco-container");
-    const width = Math.min(container.clientWidth, 672);
+    const width = Math.min(container.clientWidth, 800);
     const height = (width * 9) / 16;
     this.renderer.setSize(width, height);
     this.camera.aspect = 16 / 9;

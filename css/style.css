@@ -4,7 +4,6 @@ body > main {
   font-family: "Open Sans", sans-serif;
   color: #333;
   margin: 0 auto;
-  padding: 2em 2em;
   box-sizing: border-box;
   line-height: 1.5em;
 }
@@ -40,11 +39,15 @@ body > main {
   z-index: 1;
 }
 
-/* 滚动后添加的类：视频直接折叠+淡出 */
 #video-preface.hidden {
   height: 0;
   opacity: 0;
   pointer-events: none;
+}
+
+.fade-transition {
+  height: 15em;
+  background: linear-gradient(to bottom, #c7c7c7, #ffffff);
 }
 
 h1 {
@@ -63,8 +66,8 @@ h1 {
 }
 
 h2 {
+  text-align: left;
   font-size: 1.3em;
-  text-align: center;
   font-weight: 600;
 }
 
@@ -81,6 +84,8 @@ section {
 }
 
 p {
+  font-size: 1.1em;
+  line-height: 1.5em;
   margin-left: auto;
   margin-right: auto;
   text-align: justify;
@@ -112,7 +117,7 @@ button {
   display: none;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
   #tilted-method {
     display: none;
   }
@@ -121,7 +126,7 @@ button {
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 600px) {
   #tilted-method-narrow {
     display: none;
   }
@@ -139,13 +144,13 @@ button {
   vertical-align: middle;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
   .square-container > div:nth-child(1) {
     font-size: 0.75em;
   }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 800px) {
   .square-container {
     flex-wrap: wrap;
   }
@@ -157,7 +162,7 @@ button {
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 600px) {
   .square-container > div:nth-child(1) {
     font-size: 0.375em;
   }
@@ -179,12 +184,12 @@ button {
 }
 
 /* Math */
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 800px) {
   .katex-display {
     font-size: 0.875em;
   }
 }
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 600px) {
   .katex-display {
     font-size: 0.75em;
   }
@@ -224,7 +229,7 @@ button {
 #mujoco-container {
   position: relative;
   width: 100%;
-  max-width: 672px;
+  max-width: 800px;
   margin: 0 auto;
   aspect-ratio: 16 / 9;
   display: flex;
@@ -236,7 +241,7 @@ button {
 #mujoco {
   position: relative;
   width: 100%;
-  max-width: 672px;
+  max-width: 800px;
 }
 
 /* Floating Control Panel (top-right corner) */
@@ -252,7 +257,7 @@ section > div {
   flex-direction: column;
   align-items: center;
   gap: 1em;
-  max-width: 672px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -260,7 +265,7 @@ section > div {
 .video-container {
   position: relative;
   width: 100%;
-  max-width: 672px;
+  max-width: 800px;
   padding-top: 56.25%;
 }
 .video-container iframe {
@@ -269,4 +274,12 @@ section > div {
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+figcaption {
+  font-size: 1.1em;
+  line-height: 1.5em;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: justify;
 }
