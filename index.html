@@ -81,6 +81,21 @@
       rel="stylesheet"
     />
 
+    <!-- Prismjs for citation -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bibtex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.css"
+      rel="stylesheet"
+    />
+
     <!-- KaTeX -->
     <link
       rel="stylesheet"
@@ -307,6 +322,18 @@
           </figcaption>
         </div>
       </section>
+      <div style="height: 1em"></div>
+
+      <section>
+        <h2>Citation</h2>
+        <p>Please use the following BibTeX entry to cite this work:</p>
+        <pre class="code-snippet"><code>@article{yu2025reconfigurable,
+  title={Reconfigurable Legged Metamachines that Run on Autonomous Modular Legs},
+  author={Chen Yu and David Matthews and Jingxian Wang and Jing Gu and Douglas Blackiston and Michael Rubenstein and Sam Kriegman},
+  journal={arXiv preprint arXiv:2505.00784},
+  year={2025}
+  }</code></pre>
+      </section>
       <div style="height: 3em"></div>
     </main>
     <script>
@@ -326,6 +353,15 @@
           preface.classList.remove("hidden");
         }
       });
+    </script>
+    <script>
+      function copyCode(button) {
+        const code = button.nextElementSibling.textContent;
+        navigator.clipboard.writeText(code).then(() => {
+          button.textContent = "Copied!";
+          setTimeout(() => (button.textContent = "Copy"), 1500);
+        });
+      }
     </script>
   </body>
 </html>
