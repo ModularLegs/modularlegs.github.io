@@ -1,4 +1,4 @@
-body {
+body > main {
   min-height: 100%;
   background-color: #fff;
   font-family: "Open Sans", sans-serif;
@@ -8,6 +8,44 @@ body {
   box-sizing: border-box;
   line-height: 1.5em;
 }
+/* 初始 header 样式 */
+#video-preface {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  transition: height 1s ease, opacity 1s ease;
+}
+
+#preface-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: Lato, sans-serif;
+  z-index: 1;
+}
+
+/* 滚动后添加的类：视频直接折叠+淡出 */
+#video-preface.hidden {
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
 
 h1 {
   font-size: 2em;
@@ -15,6 +53,15 @@ h1 {
   line-height: 1.5em;
   margin-bottom: 0.5em;
 }
+
+.title {
+  font-size: 2em;
+  font-family: "Michroma", sans-serif;
+  text-align: center;
+  line-height: 1.5em;
+  margin-bottom: 0.5em;
+}
+
 h2 {
   font-size: 1.3em;
   text-align: center;
@@ -143,6 +190,36 @@ button {
   }
 }
 
+#authors {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
+  gap: 0.4em 1.25em;
+  max-width: 32em;
+  margin: 0 auto;
+  font-weight: 600;
+  color: #666;
+}
+
+#affiliations {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
+  gap: 0.4em 1.25em;
+  margin: 0 auto;
+  font-weight: 400;
+}
+
+#links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
 /* Center the MuJoCo container with 16:9 ratio */
 #mujoco-container {
   position: relative;
@@ -177,4 +254,19 @@ section > div {
   gap: 1em;
   max-width: 672px;
   margin: 0 auto;
+}
+
+/* Video element */
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 672px;
+  padding-top: 56.25%;
+}
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
