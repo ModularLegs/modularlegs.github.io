@@ -8,7 +8,7 @@ body > main {
   line-height: 1.5em;
 }
 
-#video-preface {
+#preface-section {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -45,6 +45,14 @@ body > main {
   pointer-events: none;
 }
 
+.preface-title {
+  font-size: 2em;
+  font-family: "Michroma", sans-serif;
+  text-align: center;
+  line-height: 1.5em;
+  margin-bottom: 0.5em;
+}
+
 .fade-transition {
   height: 15em;
   background: linear-gradient(to bottom, #c7c7c7, #ffffff);
@@ -52,14 +60,6 @@ body > main {
 
 h1 {
   font-size: 2em;
-  text-align: center;
-  line-height: 1.5em;
-  margin-bottom: 0.5em;
-}
-
-.title {
-  font-size: 2em;
-  font-family: "Michroma", sans-serif;
   text-align: center;
   line-height: 1.5em;
   margin-bottom: 0.5em;
@@ -98,101 +98,11 @@ button {
   padding: 0.5em 2em;
   text-align: center;
   text-decoration: none;
+  color: #333;
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
-}
-
-#tilted-method,
-#tilted-method-narrow {
-  display: block;
-  margin: 0 auto;
-  width: 70em;
-  max-width: 100%;
-}
-#tilted-method-narrow {
-  display: none;
-}
-#tilted-method-very-narrow {
-  display: none;
-}
-
-@media screen and (max-width: 1000px) {
-  #tilted-method {
-    display: none;
-  }
-  #tilted-method-narrow {
-    display: block;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  #tilted-method-narrow {
-    display: none;
-  }
-  #tilted-method-very-narrow {
-    display: block;
-  }
-}
-
-.square-container {
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  gap: 0.5em 1em;
-  position: relative;
-  vertical-align: middle;
-}
-
-@media screen and (max-width: 1000px) {
-  .square-container > div:nth-child(1) {
-    font-size: 0.75em;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .square-container {
-    flex-wrap: wrap;
-  }
-  .square-container > div:nth-child(1) {
-    font-size: 0.65em;
-  }
-  .square-container > div:nth-child(2) {
-    width: 18em;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .square-container > div:nth-child(1) {
-    font-size: 0.375em;
-  }
-}
-
-/* Children are (matrices/LaTeX, text). */
-.square-container > div:nth-child(1) {
-  vertical-align: middle;
-  text-align: center;
-  text-wrap: nowrap;
-}
-
-.square-container > div:nth-child(1) > * {
-  vertical-align: middle;
-}
-
-.square-container > div:nth-child(2) {
-  text-align: left;
-}
-
-/* Math */
-@media screen and (max-width: 800px) {
-  .katex-display {
-    font-size: 0.875em;
-  }
-}
-@media screen and (max-width: 600px) {
-  .katex-display {
-    font-size: 0.75em;
-  }
+  min-width: 12em;
 }
 
 #authors {

@@ -96,26 +96,6 @@
       rel="stylesheet"
     />
 
-    <!-- KaTeX -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"
-      integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn"
-      crossorigin="anonymous"
-    />
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"
-      integrity="sha384-cpW21h6RZv/phavutF+AuVYrr+dA8xD9zs6FwLpaCct6O9ctzYFfFr4dgmgccOTx"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
-      integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
-      crossorigin="anonymous"
-    ></script>
-
     <!-- REMOVE MUJOCO -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script
@@ -162,7 +142,7 @@
   </head>
 
   <body>
-    <header id="video-preface">
+    <header id="preface-section">
       <video
         autoplay
         muted
@@ -175,7 +155,7 @@
         <source src="assets/fastout.mp4" type="video/mp4" />
       </video>
       <div class="overlay">
-        <h1 class="title">
+        <h1 class="preface-title">
           Reconfigurable Legged Metamachines that <br />
           Run on Autonomous Modular Legs
         </h1>
@@ -222,13 +202,13 @@
       <!-- Links -->
       <div id="links">
         <a href="https://arxiv.org/abs/2505.00784" target="_blank">
-          <button style="min-width: 12em">
+          <button>
             <i class="ti ti-article"></i>
             arXiv
           </button>
         </a>
         <a href="https://github.com/Chenaah/modularlegs" target="_blank">
-          <button style="min-width: 12em">
+          <button>
             <i class="ti ti-brand-github"></i>
             Code
           </button>
@@ -353,15 +333,6 @@
           preface.classList.remove("hidden");
         }
       });
-    </script>
-    <script>
-      function copyCode(button) {
-        const code = button.nextElementSibling.textContent;
-        navigator.clipboard.writeText(code).then(() => {
-          button.textContent = "Copied!";
-          setTimeout(() => (button.textContent = "Copy"), 1500);
-        });
-      }
     </script>
   </body>
 </html>
