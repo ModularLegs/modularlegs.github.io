@@ -135,6 +135,74 @@ button {
   gap: 1em;
 }
 
+.split-cta {
+  display: inline-flex;
+  align-items: stretch;
+  border-radius: 999px;
+  background: #e5e7eb;
+  padding: 0.3em;
+  box-shadow:
+    0 12px 26px rgba(15, 23, 42, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  overflow: hidden;
+  position: relative;
+}
+
+.split-cta::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0)
+  );
+  pointer-events: none;
+}
+
+.split-cta__half {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.65em 1.6em;
+  color: #0f172a;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.split-cta__half--arxiv {
+  background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);
+  color: #0b1220;
+  border-radius: 999px 0 0 999px;
+}
+
+.split-cta__half--code {
+  background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);
+  color: #0b1220;
+  text-shadow: none;
+  border-radius: 0 999px 999px 0;
+}
+
+.split-cta__half + .split-cta__half {
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.split-cta__half:hover {
+  transform: translateY(-1px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.split-cta__icon {
+  display: inline-flex;
+  font-size: 1.1em;
+}
+
 .tldr {
   text-align: center;
   font-size: 1.1em;
