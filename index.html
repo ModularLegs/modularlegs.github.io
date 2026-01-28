@@ -265,6 +265,24 @@
     </div>
   </footer>
   <script>
+    const significanceCard = document.querySelector(".text-card.significance");
+    if (significanceCard) {
+      const updateGradient = (event) => {
+        const rect = significanceCard.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width) * 100;
+        const y = ((event.clientY - rect.top) / rect.height) * 100;
+        significanceCard.style.setProperty("--mx", `${x}%`);
+        significanceCard.style.setProperty("--my", `${y}%`);
+      };
+
+      significanceCard.addEventListener("pointermove", updateGradient);
+      significanceCard.addEventListener("pointerleave", () => {
+        significanceCard.style.setProperty("--mx", "50%");
+        significanceCard.style.setProperty("--my", "35%");
+      });
+    }
+  </script>
+  <script>
     window.addEventListener("scroll", function () {
       const preface = document.getElementById("video-preface");
       if (
