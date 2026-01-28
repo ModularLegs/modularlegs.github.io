@@ -249,7 +249,7 @@ figcaption {
   background: radial-gradient(
     circle at var(--mx, 50%) var(--my, 35%),
     #fffafd 0%,
-    #ede3e8 45%,
+    #fff2fd 45%,
     #fff5fb 70%,
     #faf5f8 100%
   );
