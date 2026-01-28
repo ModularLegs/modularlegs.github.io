@@ -1,4 +1,4 @@
-body > main {
+body>main {
   min-height: 100%;
   background-color: #fff;
   font-family: "Open Sans", sans-serif;
@@ -177,7 +177,7 @@ button {
 }
 
 /* Video section for consistent layout */
-section > div {
+section>div {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -193,6 +193,7 @@ section > div {
   max-width: 800px;
   padding-top: 56.25%;
 }
+
 .video-container iframe {
   position: absolute;
   top: 0;
@@ -220,4 +221,86 @@ figcaption {
   line-height: 1.5em;
   color: #222;
   max-width: 100%;
+}
+
+/* Text Card Styling */
+.text-card {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  padding: 2em;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2em;
+  border: 1px solid #e9ecef;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.text-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.text-card.significance {
+  background-color: #fff9db;
+  /* Light yellow */
+  border-color: #faeec5;
+  margin-top: 6em;
+}
+
+.text-card h2 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+/* Video Section Styling */
+.video-section {
+  max-width: 80em;
+  /* Even wider layout */
+  margin: 0 auto;
+}
+
+.video-section h2 {
+  font-size: 1.8em;
+  /* Smaller title */
+  margin-bottom: 1em;
+  text-align: left;
+  /* Left aligned */
+  margin-left: 0;
+  padding-left: 0.5em;
+  /* Align slightly with card edge */
+}
+
+/* Media Card Styling */
+.media-card {
+  background-color: #000;
+  /* Black background for video part */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 3em;
+  border: none;
+  /* Remove border for cleaner look */
+  padding: 0;
+  /* Remove padding so video touches edges */
+}
+
+.media-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+}
+
+.media-card figcaption {
+  font-size: 1.1em;
+  line-height: 1.6em;
+  padding: 2em;
+  /* Increase padding for whitespace */
+  text-align: justify;
+  /* Justify text for clean block look */
+  background-color: #fff;
+  /* White background for text part */
+  color: #333;
+  margin: 0;
+  /* Reset margin */
+  max-width: 100%;
+  /* Full width */
 }
