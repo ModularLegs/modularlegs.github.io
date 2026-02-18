@@ -168,6 +168,13 @@
           <span class="split-cta__label">Code</span>
         </a>
       </div>
+      
+      <div class="split-cta">
+        <a class="split-cta__half" style="border-radius: 999px; background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);" href="gallery.html">
+          <span class="split-cta__icon"><i class="ti ti-photo"></i></span>
+          <span class="split-cta__label">Gallery</span>
+        </a>
+      </div>
     </div>
 
     <!-- tldr -->
@@ -253,6 +260,48 @@
         </figcaption>
       </div>
     </section>
+
+    <!-- Images Section -->
+    <section class="images-section">
+      <div class="images-section__header">
+        <h2>Images</h2>
+      </div>
+      <div class="images-section__bleed">
+        <div class="slideshow-wrapper">
+          <div class="slideshow-track">
+            <div class="slide" data-src="images/jpg/IMG_0386.jpg"><img src="images/jpg/IMG_0386.jpg" alt="Robot image" loading="lazy"></div>
+            <div class="slide" data-src="images/jpg/IMG_0388.jpg"><img src="images/jpg/IMG_0388.jpg" alt="Robot image" loading="lazy"></div>
+            <div class="slide" data-src="images/jpg/IMG_0391.jpg"><img src="images/jpg/IMG_0391.jpg" alt="Robot image" loading="lazy"></div>
+            <div class="slide" data-src="images/jpg/IMG_0392.jpg"><img src="images/jpg/IMG_0392.jpg" alt="Robot image" loading="lazy"></div>
+            <div class="slide" data-src="images/jpg/IMG_0394.jpg"><img src="images/jpg/IMG_0394.jpg" alt="Robot image" loading="lazy"></div>
+            <div class="slide" data-src="images/jpg/IMG_0395.jpg"><img src="images/jpg/IMG_0395.jpg" alt="Robot image" loading="lazy"></div>
+            <div class="slide" data-src="images/jpg/IMG_0398.jpg"><img src="images/jpg/IMG_0398.jpg" alt="Robot image" loading="lazy"></div>
+            <div class="slide" data-src="images/jpg/IMG_0399.jpg"><img src="images/jpg/IMG_0399.jpg" alt="Robot image" loading="lazy"></div>
+            <!-- Duplicate for infinite scroll -->
+            <div class="slide" data-src="images/jpg/IMG_0386.jpg"><img src="images/jpg/IMG_0386.jpg" alt="Robot image" loading="lazy"></div>
+            <div class="slide" data-src="images/jpg/IMG_0388.jpg"><img src="images/jpg/IMG_0388.jpg" alt="Robot image" loading="lazy"></div>
+            <div class="slide" data-src="images/jpg/IMG_0391.jpg"><img src="images/jpg/IMG_0391.jpg" alt="Robot image" loading="lazy"></div>
+            <div class="slide" data-src="images/jpg/IMG_0392.jpg"><img src="images/jpg/IMG_0392.jpg" alt="Robot image" loading="lazy"></div>
+            <div class="slide" data-src="images/jpg/IMG_0394.jpg"><img src="images/jpg/IMG_0394.jpg" alt="Robot image" loading="lazy"></div>
+            <div class="slide" data-src="images/jpg/IMG_0395.jpg"><img src="images/jpg/IMG_0395.jpg" alt="Robot image" loading="lazy"></div>
+            <div class="slide" data-src="images/jpg/IMG_0398.jpg"><img src="images/jpg/IMG_0398.jpg" alt="Robot image" loading="lazy"></div>
+            <div class="slide" data-src="images/jpg/IMG_0399.jpg"><img src="images/jpg/IMG_0399.jpg" alt="Robot image" loading="lazy"></div>
+          </div>
+        </div>
+      </div>
+      <div class="images-more-btn">
+        <a href="gallery.html" class="more-button">
+          <span>More</span>
+          <i class="ti ti-arrow-right"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" id="lightbox-close">&times;</button>
+      <img class="lightbox-img" id="lightbox-img" src="" alt="Enlarged image">
+    </div>
   </main>
   <footer class="site-footer">
     <div class="footer-inner">
@@ -299,6 +348,40 @@
         preface.classList.remove("hidden");
       }
     });
+  </script>
+  <script>
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const slides = document.querySelectorAll('.slide');
+
+    slides.forEach(slide => {
+      slide.addEventListener('click', () => {
+        const imgSrc = slide.getAttribute('data-src');
+        lightboxImg.src = imgSrc;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
   </script>
 </body>
 

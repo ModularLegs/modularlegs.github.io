@@ -438,3 +438,240 @@ figcaption {
   height: 3px;
   background: linear-gradient(90deg, rgba(39, 48, 59, 0), rgba(39, 48, 59, 0.25), rgba(39, 48, 59, 0));
 }
+
+/* Images Section */
+.images-section {
+  --slider-width: min(95vw, 1600px);
+  --slider-gutter: max(0px, calc((100% - var(--slider-width)) / 2));
+  width: 100%;
+  max-width: none;
+  margin: 4em 0;
+  overflow: visible;
+}
+
+.images-section__header {
+  width: 100%;
+  margin: 0 0 1.5em;
+  padding: 0 var(--slider-gutter);
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.images-section__header h2 {
+  font-size: 1.8em;
+  margin: 0;
+  text-align: left;
+}
+
+.images-section__bleed {
+  width: 100%;
+  margin: 0;
+  padding: 0 var(--slider-gutter);
+}
+
+.slideshow-wrapper {
+  --slide-width: clamp(520px, 48vw, 900px);
+  --slide-gap: 0.75em;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+  padding: 1em calc(max(0px, calc((100% - var(--slide-width)) / 2)) + (var(--slide-gap) / 2));
+}
+
+.slideshow-wrapper::before,
+.slideshow-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.slideshow-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, #fff 0%, transparent 100%);
+}
+
+.slideshow-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, #fff 0%, transparent 100%);
+}
+
+.slideshow-track {
+  display: flex;
+  gap: var(--slide-gap);
+  animation: slideshow 40s linear infinite;
+  width: max-content;
+}
+
+.slideshow-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes slideshow {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.slide {
+  flex-shrink: 0;
+  width: var(--slide-width);
+  aspect-ratio: 3 / 2;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.4s ease;
+  position: relative;
+}
+
+.slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.slide:hover {
+  transform: scale(1.08) translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.slide:hover::after {
+  opacity: 1;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.slide:hover img {
+  transform: scale(1.1);
+}
+
+.images-more-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+}
+
+.more-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.8em 2em;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1.05em;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(26, 26, 46, 0.3);
+}
+
+.more-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(26, 26, 46, 0.4);
+  background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+}
+
+.more-button i {
+  transition: transform 0.3s ease;
+}
+
+.more-button:hover i {
+  transform: translateX(4px);
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  backdrop-filter: blur(10px);
+}
+
+.lightbox.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  transform: scale(0.9);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.lightbox.active .lightbox-img {
+  transform: scale(1);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1.5em;
+  right: 1.5em;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  font-size: 2.5em;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  line-height: 1;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .slideshow-wrapper {
+    --slide-width: 78vw;
+  }
+
+  .images-section__header {
+    padding: 0 1em;
+  }
+
+  .slideshow-wrapper::before,
+  .slideshow-wrapper::after {
+    width: 50px;
+  }
+}
