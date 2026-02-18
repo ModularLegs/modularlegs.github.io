@@ -1,4 +1,8 @@
-body>main {
+/* =========================
+   Base layout
+   ========================= */
+
+body > main {
   min-height: 100%;
   background-color: #fff;
   font-family: "Open Sans", sans-serif;
@@ -8,6 +12,7 @@ body>main {
   line-height: 1.5em;
 }
 
+/* Preface */
 #preface-section {
   position: relative;
   width: 100%;
@@ -58,6 +63,7 @@ body>main {
   background: linear-gradient(to bottom, #c7c7c7, #ffffff);
 }
 
+/* Typography */
 h1 {
   font-size: 2em;
   text-align: center;
@@ -77,6 +83,7 @@ a:visited {
   color: inherit;
 }
 
+/* Default section layout (text sections) */
 section {
   padding-bottom: 1em;
   max-width: 50em;
@@ -91,6 +98,7 @@ p {
   text-align: justify;
 }
 
+/* Buttons */
 button {
   background: #fff;
   border-radius: 0.5em;
@@ -105,6 +113,7 @@ button {
   min-width: 12em;
 }
 
+/* Authors / affiliations / links */
 #authors {
   display: flex;
   flex-wrap: wrap;
@@ -135,14 +144,14 @@ button {
   gap: 1em;
 }
 
+/* Split CTA */
 .split-cta {
   display: inline-flex;
   align-items: stretch;
   border-radius: 999px;
   background: #e5e7eb;
   padding: 0.3em;
-  box-shadow:
-    0 12px 26px rgba(15, 23, 42, 0.2),
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.35);
   border: 1px solid rgba(148, 163, 184, 0.6);
   overflow: hidden;
@@ -203,6 +212,7 @@ button {
   font-size: 1.1em;
 }
 
+/* TLDR */
 .tldr {
   text-align: center;
   font-size: 1.1em;
@@ -218,7 +228,7 @@ button {
   white-space: normal;
 }
 
-/* Center the MuJoCo container with 16:9 ratio */
+/* MuJoCo (kept in case you re-enable it) */
 #mujoco-container {
   position: relative;
   width: 100%;
@@ -230,46 +240,19 @@ button {
   align-items: center;
 }
 
-/* MuJoCo simulator within the container */
 #mujoco {
   position: relative;
   width: 100%;
   max-width: 800px;
 }
 
-/* Floating Control Panel (top-right corner) */
 #mujoco-controls {
   position: absolute;
   top: 0;
   right: 0;
 }
 
-/* Video section for consistent layout */
-section>div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1em;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-/* Video element */
-.video-container {
-  position: relative;
-  width: 100%;
-  max-width: 800px;
-  padding-top: 56.25%;
-}
-
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
+/* Captions */
 figcaption {
   font-size: 1.1em;
   line-height: 1.5em;
@@ -278,6 +261,7 @@ figcaption {
   text-align: justify;
 }
 
+/* Code snippet */
 .code-snippet {
   background-color: #f5f8fa;
   padding: 1em;
@@ -296,7 +280,7 @@ figcaption {
   border: 1px solid #e6edf2;
 }
 
-/* Text Card Styling */
+/* Text cards */
 .text-card {
   background-color: #f8f9fa;
   border-radius: 12px;
@@ -323,8 +307,7 @@ figcaption {
   );
   border: none;
   margin-top: 6em;
-  box-shadow:
-    0 18px 40px rgba(90, 30, 70, 0.22),
+  box-shadow: 0 18px 40px rgba(90, 30, 70, 0.22),
     inset 0 1px 0 rgba(255, 255, 255, 0.7);
   overflow: hidden;
 }
@@ -334,79 +317,16 @@ figcaption {
   color: #2c3e50;
 }
 
-
-/* Video Section Styling */
-.video-section {
-  max-width: 80em;
-  /* Even wider layout */
-  margin: 0 auto;
-}
-
-.video-section h2 {
-  font-size: 1.8em;
-  /* Smaller title */
-  margin: 0 auto 1em;
-  text-align: left;
-  width: min(90vw, 72em);
-  max-width: none;
-  box-sizing: border-box;
-  padding-left: 2em;
-}
-
-/* Media Card Styling */
-.media-card {
-  background-color: #000;
-  /* Black background for video part */
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin-bottom: 3em;
-  border: none;
-  /* Remove border for cleaner look */
-  padding: 0;
-  /* Remove padding so video touches edges */
-}
-
-.media-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
-}
-
-.media-card figcaption {
-  font-size: 1.1em;
-  line-height: 1.6em;
-  padding: 2em;
-  /* Increase padding for whitespace */
-  text-align: justify;
-  /* Justify text for clean block look */
-  background-color: #fff;
-  /* White background for text part */
-  color: #333;
-  margin: 0;
-  /* Reset margin */
-  max-width: 100%;
-  /* Full width */
-}
-
-/* Wider cards for the video section while keeping the title aligned */
-.video-section .media-card {
-  display: block;
-  width: min(90vw, 72em);
-  max-width: none;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.video-section .video-container {
-  max-width: none;
-}
-
-/* Footer / Citation */
+/* Footer */
 .site-footer {
   margin-top: 4em;
   padding: 3em 2em 4em;
-  background: radial-gradient(120% 120% at 10% 0%, #f7f8fa 0%, #eceff3 45%, #e5e9ee 100%);
+  background: radial-gradient(
+    120% 120% at 10% 0%,
+    #f7f8fa 0%,
+    #eceff3 45%,
+    #e5e9ee 100%
+  );
   border-top: 1px solid #d7dde4;
   box-shadow: 0 -18px 36px rgba(15, 23, 42, 0.12);
   position: relative;
@@ -436,50 +356,133 @@ figcaption {
   left: 10%;
   right: 10%;
   height: 3px;
-  background: linear-gradient(90deg, rgba(39, 48, 59, 0), rgba(39, 48, 59, 0.25), rgba(39, 48, 59, 0));
+  background: linear-gradient(
+    90deg,
+    rgba(39, 48, 59, 0),
+    rgba(39, 48, 59, 0.25),
+    rgba(39, 48, 59, 0)
+  );
 }
 
-/* Images Section */
-.images-section {
-  --slider-width: min(95vw, 1600px);
-  --slider-gutter: max(0px, calc((100% - var(--slider-width)) / 2));
-  width: 100%;
-  max-width: none;
-  margin: 4em 0;
-  overflow: visible;
+/* =========================
+   Peer sections: Videos + Images
+   ========================= */
+
+/* VIDEOS: escape default section max-width and use a wider viewport */
+section.video-section {
+  max-width: none; /* override section { max-width:50em } */
+  width: min(90vw, 72em);
+  margin: 0 auto 3em;
+  padding: 0 0 1.5em;
 }
 
-.images-section__header {
-  width: 100%;
-  margin: 0 0 1.5em;
-  padding: 0 var(--slider-gutter);
-  box-sizing: border-box;
-  text-align: left;
-}
-
-.images-section__header h2 {
+section.video-section > h2 {
   font-size: 1.8em;
-  margin: 0;
+  font-weight: 600;
   text-align: left;
+  margin: 0 0 1em;
+}
+
+/* Scope the old "section > div" layout rule to videos only */
+section.video-section > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Media card */
+.media-card {
+  background-color: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  padding: 0;
+  width: 100%;
+  margin: 0 auto 3em;
+}
+
+.media-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+}
+
+.media-card figcaption {
+  font-size: 1.1em;
+  line-height: 1.6em;
+  padding: 2em;
+  text-align: justify;
+  background-color: #fff;
+  color: #333;
+  margin: 0;
+  max-width: 100%;
+}
+
+/* Video element fills media-card */
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  max-width: none;
+}
+
+.video-container iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================
+   IMAGES: wider than videos, centered, title aligns with slider left edge
+   ========================= */
+
+section.images-section {
+  /* escape default text section width */
+  max-width: none;
+  margin: 0;
+  padding-bottom: 1.5em;
+
+  width: var(--images-vp);
+  margin: 0 auto;
+  padding: 1em 0;
+
+  /* single source of truth for Images viewport width */
+  --images-vp: min(95vw, 96em); /* slider slightly wider than videos */
+}
+
+section.images-section > h2 {
+  width: var(--images-vp);
+  margin: 0 auto 1em;
+  text-align: left;
+  font-size: 1.8em;
+  font-weight: 600;
 }
 
 .images-section__bleed {
   width: 100%;
   margin: 0;
-  padding: 0 var(--slider-gutter);
+  padding: 0;
 }
 
+/* Slider viewport */
 .slideshow-wrapper {
   --slide-width: clamp(520px, 48vw, 900px);
   --slide-gap: 0.75em;
-  width: 100%;
-  margin: 0;
+
+  width: var(--images-vp);
+  margin: 0 auto;
+  padding: 1em 0;
   box-sizing: border-box;
   overflow: hidden;
   position: relative;
-  padding: 1em calc(max(0px, calc((100% - var(--slide-width)) / 2)) + (var(--slide-gap) / 2));
 }
 
+/* Edge fades */
 .slideshow-wrapper::before,
 .slideshow-wrapper::after {
   content: "";
@@ -501,6 +504,7 @@ figcaption {
   background: linear-gradient(to left, #fff 0%, transparent 100%);
 }
 
+/* Track */
 .slideshow-track {
   display: flex;
   gap: var(--slide-gap);
@@ -521,6 +525,7 @@ figcaption {
   }
 }
 
+/* Slide */
 .slide {
   flex-shrink: 0;
   width: var(--slide-width);
@@ -530,7 +535,7 @@ figcaption {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   cursor: pointer;
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              box-shadow 0.4s ease;
+    box-shadow 0.4s ease;
   position: relative;
 }
 
@@ -538,10 +543,12 @@ figcaption {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg,
+  background: linear-gradient(
+    135deg,
     rgba(255, 255, 255, 0.2) 0%,
     transparent 50%,
-    rgba(0, 0, 0, 0.1) 100%);
+    rgba(0, 0, 0, 0.1) 100%
+  );
   opacity: 0;
   transition: opacity 0.4s ease;
 }
@@ -555,24 +562,28 @@ figcaption {
   opacity: 1;
 }
 
+/* Preserve aspect ratio (no cropping) */
 .slide img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  background: #fff;
   object-position: center;
   transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .slide:hover img {
-  transform: scale(1.1);
+  transform: scale(1.06);
 }
 
+/* More button wrapper */
 .images-more-btn {
   display: flex;
   justify-content: center;
   margin-top: 2em;
 }
 
+/* More button */
 .more-button {
   display: inline-flex;
   align-items: center;
@@ -660,14 +671,18 @@ figcaption {
   transform: rotate(90deg);
 }
 
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width: 768px) {
-  .slideshow-wrapper {
-    --slide-width: 78vw;
+  section.video-section {
+    width: 92vw;
   }
 
-  .images-section__header {
-    padding: 0 1em;
+  section.images-section {
+    --images-vp: 92vw;
+  }
+
+  .slideshow-wrapper {
+    --slide-width: 78vw;
   }
 
   .slideshow-wrapper::before,
