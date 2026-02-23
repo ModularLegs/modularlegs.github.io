@@ -45,19 +45,84 @@
         background: #f0f0f0;
     }
 
+    /* ── Tag colours (used by filter pills AND image badges) ── */
+    :root {
+      --tag-single-modules: #e67e22;
+      --tag-evo3:           #2ecc71;
+      --tag-evo4:           #3498db;
+      --tag-evo5:           #9b59b6;
+      --tag-quad:           #e74c3c;
+    }
+
+    /* ── Filter bar ── */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 0.5em 0 1.5em;
+    }
+    .filter-tag {
+      padding: 8px 20px;
+      border-radius: 999px;
+      border: 2px solid #ddd;
+      background: #fff;
+      color: #555;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      user-select: none;
+    }
+    .filter-tag:hover {
+      opacity: 0.85;
+    }
+    /* Per-type border & text colours (inactive state) */
+    .filter-tag[data-filter="single_modules"] { border-color: var(--tag-single-modules); color: var(--tag-single-modules); }
+    .filter-tag[data-filter="evo3"]           { border-color: var(--tag-evo3);           color: var(--tag-evo3); }
+    .filter-tag[data-filter="evo4"]           { border-color: var(--tag-evo4);           color: var(--tag-evo4); }
+    .filter-tag[data-filter="evo5"]           { border-color: var(--tag-evo5);           color: var(--tag-evo5); }
+    .filter-tag[data-filter="quad"]           { border-color: var(--tag-quad);           color: var(--tag-quad); }
+    .filter-tag[data-filter="all"]            { border-color: #555;                      color: #555; }
+    /* Active state: filled */
+    .filter-tag.active[data-filter="single_modules"] { background: var(--tag-single-modules); color: #fff; }
+    .filter-tag.active[data-filter="evo3"]           { background: var(--tag-evo3);           color: #fff; }
+    .filter-tag.active[data-filter="evo4"]           { background: var(--tag-evo4);           color: #fff; }
+    .filter-tag.active[data-filter="evo5"]           { background: var(--tag-evo5);           color: #fff; }
+    .filter-tag.active[data-filter="quad"]           { background: var(--tag-quad);           color: #fff; }
+    .filter-tag.active[data-filter="all"]            { background: #555;                      color: #fff; }
+
+    .filter-count {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 1px 7px;
+      border-radius: 999px;
+      margin-left: 5px;
+      background: rgba(0,0,0,0.08);
+    }
+    .filter-tag.active .filter-count {
+      background: rgba(255,255,255,0.25);
+    }
+
+    /* ── Gallery grid ── */
     .gallery-container {
       column-count: 5;
       column-gap: 1em;
       padding: 1em 0;
     }
     .gallery-item {
+      position: relative;
       break-inside: avoid;
       margin-bottom: 1em;
       background: #f9f9f9;
       border-radius: 8px;
       overflow: hidden;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
+      transition: transform 0.2s, opacity 0.3s;
+    }
+    .gallery-item.hidden {
+      display: none;
     }
     .gallery-item:hover {
         transform: translateY(-5px);
@@ -68,8 +133,40 @@
       display: block;
       cursor: pointer;
     }
-    
-    /* Lightbox */
+
+    /* Lazy-load shimmer placeholder */
+    .gallery-item img.lazy {
+      min-height: 150px;
+      background: linear-gradient(110deg, #f0f0f0 8%, #e8e8e8 18%, #f0f0f0 33%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s linear infinite;
+    }
+    @keyframes shimmer {
+      to { background-position: -200% 0; }
+    }
+
+    /* ── Image tag badge (overlaid on each photo) ── */
+    .image-tag-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #fff;
+      pointer-events: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      line-height: 1.4;
+    }
+    .image-tag-badge[data-tag="single_modules"] { background: var(--tag-single-modules); }
+    .image-tag-badge[data-tag="evo3"]           { background: var(--tag-evo3); }
+    .image-tag-badge[data-tag="evo4"]           { background: var(--tag-evo4); }
+    .image-tag-badge[data-tag="evo5"]           { background: var(--tag-evo5); }
+    .image-tag-badge[data-tag="quad"]           { background: var(--tag-quad); }
+
+    /* ── Lightbox ── */
     #lightbox {
         position: fixed;
         z-index: 999;
@@ -199,7 +296,11 @@
   <main>
     <div class="gallery-header">
       <h1 style="font-family: Michroma; margin: 0;">Agile Legged Locomotion in Reconfigurable Modular Robots</h1>
-      <a href="index.html" class="back-link">← Back to Home</a>
+      <a href="index.html" class="back-link">Back to Home</a>
+    </div>
+
+    <div id="filter-bar" class="filter-bar">
+      <!-- Populated by JS -->
     </div>
 
     <div id="gallery" class="gallery-container">
@@ -214,7 +315,7 @@
       
       <div class="lightbox-actions">
         <a href="#" class="download-btn" download>
-          <i class="ti ti-download"></i> Download Original CR3
+          <i class="ti ti-download"></i> Download Original
         </a>
 
         <div class="share-buttons">
@@ -234,62 +335,136 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
         const gallery = document.getElementById('gallery');
+        const filterBar = document.getElementById('filter-bar');
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = lightbox.querySelector('img');
         const downloadBtn = lightbox.querySelector('.download-btn');
         const closeBtn = document.querySelector('.close-lightbox');
-        
-        // Share buttons elements
+
+        // Share buttons
         const twitterBtn = lightbox.querySelector('.share-btn.twitter');
         const facebookBtn = lightbox.querySelector('.share-btn.facebook');
         const linkedinBtn = lightbox.querySelector('.share-btn.linkedin');
-        
-        // Base URL for sharing (use current page URL)
+
         const currentUrl = encodeURIComponent(window.location.href);
         const shareText = encodeURIComponent("Check out this amazing robot gallery! #Robotics #ModularRobots");
-
         twitterBtn.href = `https://twitter.com/intent/tweet?text=${shareText}&url=${currentUrl}`;
         facebookBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
         linkedinBtn.href = `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`;
 
-        // Fetch the list of images
+        // ── Tag definitions ──────────────────────────────────
+        const TAG_MAP = {
+            'single_modules': 'Single Module',
+            'evo3':           '3 Modules',
+            'evo4':           '4 Modules',
+            'evo5':           '5 Modules',
+            'quad':           'Quadruped'
+        };
+        const TAG_ORDER = ['single_modules', 'evo3', 'evo4', 'evo5', 'quad'];
+
+        let activeFilter = 'all';
+        let allItems = [];
+
+        // ── IntersectionObserver for lazy loading ────────────
+        const lazyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                        img.addEventListener('load', () => img.classList.remove('lazy'), { once: true });
+                    }
+                    lazyObserver.unobserve(img);
+                }
+            });
+        }, { rootMargin: '300px' });
+
+        // ── Build filter bar ─────────────────────────────────
+        function buildFilterBar(images) {
+            const counts = {};
+            images.forEach(img => { counts[img.subdir] = (counts[img.subdir] || 0) + 1; });
+
+            const allBtn = document.createElement('button');
+            allBtn.className = 'filter-tag active';
+            allBtn.dataset.filter = 'all';
+            allBtn.innerHTML = `All <span class="filter-count">${images.length}</span>`;
+            filterBar.appendChild(allBtn);
+
+            TAG_ORDER.forEach(key => {
+                if (!counts[key]) return;
+                const btn = document.createElement('button');
+                btn.className = 'filter-tag';
+                btn.dataset.filter = key;
+                btn.innerHTML = `${TAG_MAP[key]} <span class="filter-count">${counts[key]}</span>`;
+                filterBar.appendChild(btn);
+            });
+
+            filterBar.addEventListener('click', (e) => {
+                const btn = e.target.closest('.filter-tag');
+                if (!btn) return;
+                filterBar.querySelectorAll('.filter-tag').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeFilter = btn.dataset.filter;
+                applyFilter();
+            });
+        }
+
+        // ── Apply filter ─────────────────────────────────────
+        function applyFilter() {
+            allItems.forEach(({ el, subdir, img }) => {
+                const visible = (activeFilter === 'all' || subdir === activeFilter);
+                el.classList.toggle('hidden', !visible);
+                if (visible && img.dataset.src) {
+                    lazyObserver.observe(img);
+                }
+            });
+        }
+
+        // ── Fetch & render ───────────────────────────────────
         fetch('gallery.json')
             .then(response => {
-                if (!response.ok) {
-                    throw new Error("gallery.json not found. Run convert_images.py first.");
-                }
+                if (!response.ok) throw new Error("gallery.json not found. Run compress_images.py first.");
                 return response.json();
             })
             .then(images => {
-                gallery.innerHTML = ''; // Clear loading text
+                gallery.innerHTML = '';
                 if (images.length === 0) {
-                    gallery.innerHTML = '<p>No images found. Please run the conversion script.</p>';
+                    gallery.innerHTML = '<p>No images found. Please run the compression script.</p>';
                     return;
                 }
 
-                images.forEach(filename => {
+                buildFilterBar(images);
+
+                images.forEach(imageData => {
                     const item = document.createElement('div');
                     item.className = 'gallery-item';
-                    
+                    item.dataset.subdir = imageData.subdir;
+
+                    // Coloured tag badge
+                    const badge = document.createElement('span');
+                    badge.className = 'image-tag-badge';
+                    badge.dataset.tag = imageData.subdir;
+                    badge.textContent = TAG_MAP[imageData.subdir] || imageData.subdir;
+                    item.appendChild(badge);
+
                     const img = document.createElement('img');
-                    img.src = `images/jpg/${filename}`;
-                    img.alt = filename;
-                    img.loading = "lazy"; // Lazy load for better performance with many images
-                    
+                    img.dataset.src = imageData.compressed_path;
+                    img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+                    img.alt = `${TAG_MAP[imageData.subdir] || imageData.subdir} – ${imageData.filename}`;
+                    img.className = 'lazy';
+
                     img.addEventListener('click', () => {
-                        lightboxImg.src = img.src;
-                        
-                        // Assuming the original file is .CR3
-                        // Replace the .jpg extension with .CR3
-                        const originalFilename = filename.replace(/\.jpg$/i, '.CR3');
-                        downloadBtn.href = `images/${originalFilename}`;
-                        downloadBtn.download = originalFilename;
-                        
+                        lightboxImg.src = imageData.compressed_path;
+                        downloadBtn.href = imageData.original_path;
+                        downloadBtn.download = imageData.filename;
                         lightbox.classList.add('active');
                     });
 
                     item.appendChild(img);
                     gallery.appendChild(item);
+                    allItems.push({ el: item, subdir: imageData.subdir, img });
+                    lazyObserver.observe(img);
                 });
             })
             .catch(err => {
@@ -297,21 +472,13 @@
                 console.error(err);
             });
 
-        // Lightbox controls
-        closeBtn.addEventListener('click', () => {
-            lightbox.classList.remove('active');
-        });
-
+        // ── Lightbox controls ────────────────────────────────
+        closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
         lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                lightbox.classList.remove('active');
-            }
+            if (e.target === lightbox) lightbox.classList.remove('active');
         });
-
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-                lightbox.classList.remove('active');
-            }
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) lightbox.classList.remove('active');
         });
     });
   </script>

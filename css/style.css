@@ -589,20 +589,20 @@ section.images-section > h2 {
   align-items: center;
   gap: 0.5em;
   padding: 0.8em 2em;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  color: #fff;
+  background: linear-gradient(135deg, #f7f4ee 0%, #e9e3d8 100%);
+  color: #1b1b1b;
   text-decoration: none;
   border-radius: 999px;
   font-weight: 600;
   font-size: 1.05em;
   transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(26, 26, 46, 0.3);
+  box-shadow: 0 6px 20px rgba(38, 32, 24, 0.18);
 }
 
 .more-button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(26, 26, 46, 0.4);
-  background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+  box-shadow: 0 12px 30px rgba(38, 32, 24, 0.28);
+  background: linear-gradient(135deg, #fff9f1 0%, #ece5d8 100%);
 }
 
 .more-button i {
@@ -649,26 +649,20 @@ section.images-section > h2 {
 
 .lightbox-close {
   position: absolute;
-  top: 1.5em;
-  right: 1.5em;
-  background: rgba(255, 255, 255, 0.1);
+  top: 24px;
+  right: 24px;
+  background: none;
   border: none;
   color: #fff;
   font-size: 2.5em;
-  width: 1.5em;
-  height: 1.5em;
-  border-radius: 50%;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease;
   line-height: 1;
+  padding: 0;
 }
 
 .lightbox-close:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: rotate(90deg);
+  opacity: 0.6;
 }
 
 /* Responsive */
