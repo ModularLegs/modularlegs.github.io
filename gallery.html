@@ -437,21 +437,53 @@
         }
 
         // ── Fetch & render ───────────────────────────────────
-        fetch('gallery.json')
-            .then(response => {
-                if (!response.ok) throw new Error("gallery.json not found. Run compress_images.py first.");
+        Promise.all([
+            fetch('gallery.json').then(response => {
+                if (!response.ok) throw new Error("gallery.json not found.");
                 return response.json();
-            })
-            .then(images => {
+            }),
+            fetch('images/picked.txt')
+                .then(response => (response.ok ? response.text() : ''))
+                .catch(() => '')
+        ])
+            .then(([images, pickedText]) => {
+                const pickedSet = new Set(
+                    pickedText
+                        .split(/\r?\n/)
+                        .map(line => line.trim())
+                        .filter(Boolean)
+                );
+                const seenPaths = new Set();
+                const filteredImages = images
+                    .filter(imageData => {
+                        if (!imageData || !imageData.filename || !imageData.subdir || !imageData.compressed_path || !imageData.original_path) {
+                            return false;
+                        }
+                        if (pickedSet.size > 0 && !pickedSet.has(imageData.filename)) {
+                            return false;
+                        }
+                        if (seenPaths.has(imageData.compressed_path)) {
+                            return false;
+                        }
+                        seenPaths.add(imageData.compressed_path);
+                        return true;
+                    })
+                    .sort((a, b) => {
+                        const aIdx = TAG_ORDER.indexOf(a.subdir);
+                        const bIdx = TAG_ORDER.indexOf(b.subdir);
+                        if (aIdx !== bIdx) return aIdx - bIdx;
+                        return a.filename.localeCompare(b.filename);
+                    });
+
                 gallery.innerHTML = '';
-                if (images.length === 0) {
-                    gallery.innerHTML = '<p>No images found. Please run the compression script.</p>';
+                if (filteredImages.length === 0) {
+                    gallery.innerHTML = '<p>No picked images found.</p>';
                     return;
                 }
 
-                buildFilterBar(images);
+                buildFilterBar(filteredImages);
 
-                images.forEach(imageData => {
+                filteredImages.forEach(imageData => {
                     const item = document.createElement('div');
                     item.className = 'gallery-item';
                     item.dataset.subdir = imageData.subdir;
