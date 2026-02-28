@@ -216,6 +216,14 @@
     "drive_url": "https://drive.google.com/file/d/1JMmyO7dz-Vl7v8fOhmnjCgowsvvC1ePD/view?usp=drive_link"
   },
   {
+    "filename": "Chopping.mp4",
+    "subdir": "quad",
+    "preview_path": "videos/previews/quad/Chopping.mp4",
+    "thumbnail_path": "videos/thumbnails/quad/Chopping.jpg",
+    "youtube_url": "https://www.youtube.com/embed/7KaNiF24Fjs?si=i4bWBDCpgYekezJm",
+    "drive_url": "https://drive.google.com/file/d/1QQe38RFd4ddW-zn6ojViWxiFR1z8NGRx/view?usp=sharing"
+  },
+  {
     "filename": "S1 Metamachines in the wild.mp4",
     "subdir": "supplemental",
     "preview_path": "videos/previews/supplemental/S1 Metamachines in the wild.mp4",
