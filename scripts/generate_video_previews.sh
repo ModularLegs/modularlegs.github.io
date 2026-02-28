@@ -11,7 +11,7 @@ THUMB_DIR="videos/thumbnails"
 PREVIEW_DIR="videos/previews"
 MANIFEST="videos.json"
 
-SUBDIRS=("single_modules" "evo3" "evo4" "evo5" "quad")
+SUBDIRS=("single_modules" "evo3" "evo4" "evo5" "quad" "supplemental")
 
 # Preview settings
 PREVIEW_WIDTH=480        # px (height auto)

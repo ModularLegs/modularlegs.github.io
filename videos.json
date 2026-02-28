@@ -214,5 +214,29 @@
     "thumbnail_path": "videos/thumbnails/quad/quadruped-uphill.jpg",
     "youtube_url": "https://www.youtube.com/embed/ltF68foS0iQ?si=gWZ8OYiRBPvC0xfp",
     "drive_url": "https://drive.google.com/file/d/1JMmyO7dz-Vl7v8fOhmnjCgowsvvC1ePD/view?usp=drive_link"
+  },
+  {
+    "filename": "S1 Metamachines in the wild.mp4",
+    "subdir": "supplemental",
+    "preview_path": "videos/previews/supplemental/S1 Metamachines in the wild.mp4",
+    "thumbnail_path": "videos/thumbnails/supplemental/S1 Metamachines in the wild.jpg",
+    "youtube_url": "https://www.youtube.com/embed/8VKSx1zSg7Q?si=5pLBe31YVcjt4IWS",
+    "drive_url": "https://drive.google.com/file/d/1tGcNOREzo-PItssL6ngP5KAqwd4rif0A/view?usp=drive_link"
+  },
+  {
+    "filename": "S2 Indoors acrobatic behavior and resilience to damage.mp4",
+    "subdir": "supplemental",
+    "preview_path": "videos/previews/supplemental/S2 Indoors acrobatic behavior and resilience to damage.mp4",
+    "thumbnail_path": "videos/thumbnails/supplemental/S2 Indoors acrobatic behavior and resilience to damage.jpg",
+    "youtube_url": "https://www.youtube.com/embed/y_A8MKdEB9A?si=ozcNhCouXlR5rvUX",
+    "drive_url": "https://drive.google.com/file/d/1jsQS59EzmReFTDUqqr0hXY4xRKX5Hqx6/view?usp=drive_link"
+  },
+  {
+    "filename": "S3 Module Assembly.mp4",
+    "subdir": "supplemental",
+    "preview_path": "videos/previews/supplemental/S3 Module Assembly.mp4",
+    "thumbnail_path": "videos/thumbnails/supplemental/S3 Module Assembly.jpg",
+    "youtube_url": "https://www.youtube.com/embed/4a6lxMyn31Q?si=c3dJm9rSXY8JQXZ-",
+    "drive_url": "https://drive.google.com/file/d/1d1w0_iITrbmRxGFGp9AvJ7YPd_myPoCh/view?usp=drive_link"
   }
 ]

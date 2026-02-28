@@ -65,6 +65,7 @@
       --tag-evo4:           #3498db;
       --tag-evo5:           #9b59b6;
       --tag-quad:           #e74c3c;
+      --tag-supplemental:   #1abc9c;
     }
 
     /* ── Filter bars ── */
@@ -100,6 +101,7 @@
     .filter-tag[data-filter="evo4"]           { border-color: var(--tag-evo4);           color: var(--tag-evo4); }
     .filter-tag[data-filter="evo5"]           { border-color: var(--tag-evo5);           color: var(--tag-evo5); }
     .filter-tag[data-filter="quad"]           { border-color: var(--tag-quad);           color: var(--tag-quad); }
+    .filter-tag[data-filter="supplemental"]   { border-color: var(--tag-supplemental);   color: var(--tag-supplemental); }
     .filter-tag[data-filter="all"]            { border-color: #555;                      color: #555; }
     /* Active state: filled */
     .filter-tag.active[data-filter="single_modules"] { background: var(--tag-single-modules); color: #fff; }
@@ -107,6 +109,7 @@
     .filter-tag.active[data-filter="evo4"]           { background: var(--tag-evo4);           color: #fff; }
     .filter-tag.active[data-filter="evo5"]           { background: var(--tag-evo5);           color: #fff; }
     .filter-tag.active[data-filter="quad"]           { background: var(--tag-quad);           color: #fff; }
+    .filter-tag.active[data-filter="supplemental"]   { background: var(--tag-supplemental);   color: #fff; }
     .filter-tag.active[data-filter="all"]            { background: #555;                      color: #fff; }
 
     /* Media type filters */
@@ -235,6 +238,7 @@
     .image-tag-badge[data-tag="evo4"]           { background: var(--tag-evo4); }
     .image-tag-badge[data-tag="evo5"]           { background: var(--tag-evo5); }
     .image-tag-badge[data-tag="quad"]           { background: var(--tag-quad); }
+    .image-tag-badge[data-tag="supplemental"]   { background: var(--tag-supplemental); }
 
     /* ── Lightbox ── */
     #lightbox {
@@ -453,9 +457,10 @@
             'evo3':           '3 Modules',
             'evo4':           '4 Modules',
             'evo5':           '5 Modules',
-            'quad':           'Quadruped'
+            'quad':           'Quadruped',
+            'supplemental':   'Supplemental Movie'
         };
-        const TAG_ORDER = ['single_modules', 'evo3', 'evo4', 'evo5', 'quad'];
+        const TAG_ORDER = ['single_modules', 'evo3', 'evo4', 'evo5', 'quad', 'supplemental'];
 
         // Read initial filter from URL query param (e.g. ?media=image)
         const urlParams = new URLSearchParams(window.location.search);
@@ -539,6 +544,39 @@
             });
         }
 
+        // ── Update filter counts based on cross-filter ──────
+        function updateFilterCounts() {
+            // Update tag filter counts (filtered by active media filter)
+            const tagCounts = {};
+            let tagTotal = 0;
+            allItems.forEach(({ subdir, type }) => {
+                if (activeMediaFilter === 'all' || type === activeMediaFilter) {
+                    tagCounts[subdir] = (tagCounts[subdir] || 0) + 1;
+                    tagTotal++;
+                }
+            });
+            filterBar.querySelectorAll('.filter-tag').forEach(btn => {
+                const key = btn.dataset.filter;
+                const count = key === 'all' ? tagTotal : (tagCounts[key] || 0);
+                btn.querySelector('.filter-count').textContent = count;
+            });
+
+            // Update media filter counts (filtered by active tag filter)
+            let mediaAll = 0, mediaVideo = 0, mediaImage = 0;
+            allItems.forEach(({ subdir, type }) => {
+                if (activeTagFilter === 'all' || subdir === activeTagFilter) {
+                    mediaAll++;
+                    if (type === 'video') mediaVideo++;
+                    else mediaImage++;
+                }
+            });
+            mediaFilterBar.querySelectorAll('.filter-tag').forEach(btn => {
+                const key = btn.dataset.media;
+                const count = key === 'all' ? mediaAll : key === 'video' ? mediaVideo : mediaImage;
+                btn.querySelector('.filter-count').textContent = count;
+            });
+        }
+
         // ── Apply combined filters ──────────────────────────
         function applyFilter() {
             allItems.forEach(({ el, subdir, type, lazyEl }) => {
@@ -550,6 +588,7 @@
                     lazyObserver.observe(lazyEl);
                 }
             });
+            updateFilterCounts();
         }
 
         // ── Fetch & render ───────────────────────────────────
