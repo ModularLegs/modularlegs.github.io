@@ -20,7 +20,7 @@
       },
     });
   </script>
-  
+
   <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css" />
   <link href="./css/style.css" rel="stylesheet" type="text/css" />
@@ -67,13 +67,16 @@
       --tag-quad:           #e74c3c;
     }
 
-    /* ── Filter bar ── */
+    /* ── Filter bars ── */
     .filter-bar {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
-      padding: 0.5em 0 1.5em;
+      padding: 0.5em 0;
+    }
+    .filter-bar + .filter-bar {
+      padding-bottom: 1.5em;
     }
     .filter-tag {
       padding: 8px 20px;
@@ -106,6 +109,14 @@
     .filter-tag.active[data-filter="quad"]           { background: var(--tag-quad);           color: #fff; }
     .filter-tag.active[data-filter="all"]            { background: #555;                      color: #fff; }
 
+    /* Media type filters */
+    .filter-tag[data-media="all"]    { border-color: #555; color: #555; }
+    .filter-tag[data-media="video"]  { border-color: #555; color: #555; }
+    .filter-tag[data-media="image"]  { border-color: #555; color: #555; }
+    .filter-tag.active[data-media="all"]   { background: #555; color: #fff; }
+    .filter-tag.active[data-media="video"] { background: #555; color: #fff; }
+    .filter-tag.active[data-media="image"] { background: #555; color: #fff; }
+
     .filter-count {
       display: inline-block;
       font-size: 0.75rem;
@@ -118,38 +129,39 @@
       background: rgba(255,255,255,0.25);
     }
 
-    /* ── Gallery grid ── */
+    /* ── Gallery grid (row-based) ── */
     .gallery-container {
-      column-count: 5;
-      column-gap: 1em;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1em;
       padding: 1em 0;
     }
     .gallery-item {
       position: relative;
-      break-inside: avoid;
-      margin-bottom: 1em;
+      width: calc((100% - 4em) / 5);
+      aspect-ratio: 16 / 9;
       background: #f9f9f9;
       border-radius: 8px;
       overflow: hidden;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       transition: transform 0.2s, opacity 0.3s;
+      cursor: pointer;
     }
     .gallery-item.hidden {
       display: none;
     }
     .gallery-item:hover {
-        transform: translateY(-5px);
+      transform: translateY(-5px);
     }
     .gallery-item img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
       display: block;
-      cursor: pointer;
     }
 
     /* Lazy-load shimmer placeholder */
     .gallery-item img.lazy {
-      min-height: 150px;
       background: linear-gradient(110deg, #f0f0f0 8%, #e8e8e8 18%, #f0f0f0 33%);
       background-size: 200% 100%;
       animation: shimmer 1.5s linear infinite;
@@ -158,7 +170,51 @@
       to { background-position: -200% 0; }
     }
 
-    /* ── Image tag badge (overlaid on each photo) ── */
+    /* ── Video card specifics ── */
+    .gallery-item video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .gallery-item:hover video {
+      opacity: 1;
+    }
+    .play-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50px;
+      height: 50px;
+      background: rgba(0,0,0,0.5);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 2;
+    }
+    .play-icon::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 10px 0 10px 18px;
+      border-color: transparent transparent transparent white;
+      margin-left: 3px;
+    }
+    .gallery-item:hover .play-icon {
+      opacity: 0;
+    }
+
+    /* ── Image/tag badge (overlaid on each card) ── */
     .image-tag-badge {
       position: absolute;
       top: 8px;
@@ -172,6 +228,7 @@
       pointer-events: none;
       box-shadow: 0 2px 6px rgba(0,0,0,0.25);
       line-height: 1.4;
+      z-index: 2;
     }
     .image-tag-badge[data-tag="single_modules"] { background: var(--tag-single-modules); }
     .image-tag-badge[data-tag="evo3"]           { background: var(--tag-evo3); }
@@ -181,124 +238,140 @@
 
     /* ── Lightbox ── */
     #lightbox {
-        position: fixed;
-        z-index: 999;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.85);
-        backdrop-filter: blur(8px);
-        display: none;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        animation: fadeIn 0.3s ease;
+      position: fixed;
+      z-index: 999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease;
     }
-    
+
     @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     @keyframes zoomIn {
-        from { transform: scale(0.9); opacity: 0; }
-        to { transform: scale(1); opacity: 1; }
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
 
     #lightbox img {
-        max-width: 90%;
-        max-height: 80vh;
-        object-fit: contain;
-        box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        border-radius: 4px;
-        animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      max-width: 90%;
+      max-height: 80vh;
+      object-fit: contain;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      border-radius: 4px;
+      animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    
+
+    #lightbox iframe {
+      width: 80vw;
+      max-width: 1200px;
+      aspect-ratio: 16 / 9;
+      border: none;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      border-radius: 4px;
+      animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    /* Hide inactive lightbox media */
+    #lightbox img.lb-hidden,
+    #lightbox iframe.lb-hidden {
+      display: none;
+    }
+
     .download-btn {
-        background: white;
-        color: #333;
-        padding: 10px 20px;
-        border-radius: 30px;
-        text-decoration: none;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        transition: transform 0.2s, background 0.2s;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        font-family: 'Open Sans', sans-serif;
+      background: white;
+      color: #333;
+      padding: 10px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s, background 0.2s;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      font-family: 'Open Sans', sans-serif;
     }
-    
+
     .download-btn:hover {
-        transform: scale(1.05);
-        background: #f0f0f0;
+      transform: scale(1.05);
+      background: #f0f0f0;
     }
 
     .lightbox-actions {
-        margin-top: 20px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 15px;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 15px;
     }
 
     .share-buttons {
-        display: flex;
-        gap: 10px;
+      display: flex;
+      gap: 10px;
     }
 
     .share-btn {
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        background: white;
-        color: #333;
-        font-size: 1.2rem;
-        cursor: pointer;
-        transition: all 0.3s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: white;
+      color: #333;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
     .share-btn:hover {
-        background: #f0f0f0;
-        transform: translateY(-3px);
+      background: #f0f0f0;
+      transform: translateY(-3px);
     }
 
     #lightbox.active {
-        display: flex;
+      display: flex;
     }
     .close-lightbox {
-        position: absolute;
-        top: 20px;
-        right: 30px;
-        color: white;
-        font-size: 30px;
-        cursor: pointer;
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
     }
 
     @media (max-width: 1200px) {
-      .gallery-container {
-        column-count: 4;
+      .gallery-item {
+        width: calc((100% - 3em) / 4);
       }
     }
     @media (max-width: 900px) {
-      .gallery-container {
-        column-count: 3;
+      .gallery-item {
+        width: calc((100% - 2em) / 3);
       }
     }
     @media (max-width: 600px) {
-      .gallery-container {
-        column-count: 2;
+      .gallery-item {
+        width: calc((100% - 1em) / 2);
       }
     }
     @media (max-width: 400px) {
-      .gallery-container {
-        column-count: 1;
+      .gallery-item {
+        width: 100%;
       }
     }
   </style>
@@ -314,47 +387,54 @@
       </div>
     </div>
 
+    <div id="media-filter-bar" class="filter-bar">
+      <!-- Media type filters: All / Videos / Images -->
+    </div>
+
     <div id="filter-bar" class="filter-bar">
-      <!-- Populated by JS -->
+      <!-- Robot type filters -->
     </div>
 
     <div id="gallery" class="gallery-container">
-        <!-- Images will be injected here -->
-        <p style="text-align: center; width: 100%; padding: 2em;">Loading images...</p>
+      <p style="text-align: center; width: 100%; padding: 2em;">Loading gallery...</p>
     </div>
   </main>
 
   <div id="lightbox">
-      <span class="close-lightbox">&times;</span>
-      <img src="" alt="Full view">
-      
-      <div class="lightbox-actions">
-        <a href="#" class="download-btn" download>
-          <i class="ti ti-download"></i> Download Original
-        </a>
+    <span class="close-lightbox">&times;</span>
+    <img src="" alt="Full view" class="lb-hidden">
+    <iframe src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="lb-hidden"></iframe>
 
-        <div class="share-buttons">
-          <a href="#" class="share-btn twitter" target="_blank" title="Share on Twitter">
-            <i class="ti ti-brand-twitter"></i>
-          </a>
-          <a href="#" class="share-btn facebook" target="_blank" title="Share on Facebook">
-            <i class="ti ti-brand-facebook"></i>
-          </a>
-          <a href="#" class="share-btn linkedin" target="_blank" title="Share on LinkedIn">
-            <i class="ti ti-brand-linkedin"></i>
-          </a>
-        </div>
+    <div class="lightbox-actions">
+      <a href="#" class="download-btn" download>
+        <i class="ti ti-download"></i> Download Original
+      </a>
+
+      <div class="share-buttons">
+        <a href="#" class="share-btn twitter" target="_blank" title="Share on Twitter">
+          <i class="ti ti-brand-twitter"></i>
+        </a>
+        <a href="#" class="share-btn facebook" target="_blank" title="Share on Facebook">
+          <i class="ti ti-brand-facebook"></i>
+        </a>
+        <a href="#" class="share-btn linkedin" target="_blank" title="Share on LinkedIn">
+          <i class="ti ti-brand-linkedin"></i>
+        </a>
       </div>
+    </div>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
         const gallery = document.getElementById('gallery');
+        const mediaFilterBar = document.getElementById('media-filter-bar');
         const filterBar = document.getElementById('filter-bar');
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = lightbox.querySelector('img');
+        const lightboxIframe = lightbox.querySelector('iframe');
         const downloadBtn = lightbox.querySelector('.download-btn');
         const closeBtn = document.querySelector('.close-lightbox');
+        const shareButtons = lightbox.querySelector('.share-buttons');
 
         // Share buttons
         const twitterBtn = lightbox.querySelector('.share-btn.twitter');
@@ -377,8 +457,12 @@
         };
         const TAG_ORDER = ['single_modules', 'evo3', 'evo4', 'evo5', 'quad'];
 
-        let activeFilter = 'all';
-        let allItems = [];
+        // Read initial filter from URL query param (e.g. ?media=image)
+        const urlParams = new URLSearchParams(window.location.search);
+        const initialMedia = urlParams.get('media');
+        let activeMediaFilter = (initialMedia === 'video' || initialMedia === 'image') ? initialMedia : 'all';
+        let activeTagFilter = 'all';
+        let allItems = [];   // { el, subdir, type, lazyEl }
 
         // ── IntersectionObserver for lazy loading ────────────
         const lazyObserver = new IntersectionObserver((entries) => {
@@ -395,15 +479,45 @@
             });
         }, { rootMargin: '300px' });
 
-        // ── Build filter bar ─────────────────────────────────
-        function buildFilterBar(images) {
+        // ── Build media filter bar ──────────────────────────
+        function buildMediaFilterBar(items) {
+            const videoCount = items.filter(i => i.type === 'video').length;
+            const imageCount = items.filter(i => i.type === 'image').length;
+
+            const filters = [
+                { key: 'all',   label: 'All',    count: items.length },
+                { key: 'video', label: 'Videos', count: videoCount },
+                { key: 'image', label: 'Images', count: imageCount },
+            ];
+
+            filters.forEach(f => {
+                if (f.count === 0 && f.key !== 'all') return;
+                const btn = document.createElement('button');
+                btn.className = 'filter-tag' + (f.key === activeMediaFilter ? ' active' : '');
+                btn.dataset.media = f.key;
+                btn.innerHTML = `${f.label} <span class="filter-count">${f.count}</span>`;
+                mediaFilterBar.appendChild(btn);
+            });
+
+            mediaFilterBar.addEventListener('click', (e) => {
+                const btn = e.target.closest('.filter-tag');
+                if (!btn) return;
+                mediaFilterBar.querySelectorAll('.filter-tag').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeMediaFilter = btn.dataset.media;
+                applyFilter();
+            });
+        }
+
+        // ── Build robot-type filter bar ─────────────────────
+        function buildTagFilterBar(items) {
             const counts = {};
-            images.forEach(img => { counts[img.subdir] = (counts[img.subdir] || 0) + 1; });
+            items.forEach(i => { counts[i.subdir] = (counts[i.subdir] || 0) + 1; });
 
             const allBtn = document.createElement('button');
             allBtn.className = 'filter-tag active';
             allBtn.dataset.filter = 'all';
-            allBtn.innerHTML = `All <span class="filter-count">${images.length}</span>`;
+            allBtn.innerHTML = `All <span class="filter-count">${items.length}</span>`;
             filterBar.appendChild(allBtn);
 
             TAG_ORDER.forEach(key => {
@@ -420,99 +534,169 @@
                 if (!btn) return;
                 filterBar.querySelectorAll('.filter-tag').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                activeFilter = btn.dataset.filter;
+                activeTagFilter = btn.dataset.filter;
                 applyFilter();
             });
         }
 
-        // ── Apply filter ─────────────────────────────────────
+        // ── Apply combined filters ──────────────────────────
         function applyFilter() {
-            allItems.forEach(({ el, subdir, img }) => {
-                const visible = (activeFilter === 'all' || subdir === activeFilter);
+            allItems.forEach(({ el, subdir, type, lazyEl }) => {
+                const mediaMatch = (activeMediaFilter === 'all' || type === activeMediaFilter);
+                const tagMatch = (activeTagFilter === 'all' || subdir === activeTagFilter);
+                const visible = mediaMatch && tagMatch;
                 el.classList.toggle('hidden', !visible);
-                if (visible && img.dataset.src) {
-                    lazyObserver.observe(img);
+                if (visible && lazyEl && lazyEl.dataset.src) {
+                    lazyObserver.observe(lazyEl);
                 }
             });
         }
 
         // ── Fetch & render ───────────────────────────────────
         Promise.all([
-            fetch('gallery.json').then(response => {
-                if (!response.ok) throw new Error("gallery.json not found.");
-                return response.json();
-            }),
+            fetch('videos.json')
+                .then(r => r.ok ? r.json() : [])
+                .catch(() => []),
+            fetch('gallery.json')
+                .then(r => { if (!r.ok) throw new Error("gallery.json not found."); return r.json(); }),
             fetch('images/picked.txt')
-                .then(response => (response.ok ? response.text() : ''))
+                .then(r => (r.ok ? r.text() : ''))
                 .catch(() => '')
         ])
-            .then(([images, pickedText]) => {
-                const pickedSet = new Set(
-                    pickedText
-                        .split(/\r?\n/)
-                        .map(line => line.trim())
-                        .filter(Boolean)
-                );
-                const seenPaths = new Set();
-                const filteredImages = images
-                    .filter(imageData => {
-                        if (!imageData || !imageData.filename || !imageData.subdir || !imageData.compressed_path || !imageData.original_path) {
-                            return false;
-                        }
-                        if (pickedSet.size > 0 && !pickedSet.has(imageData.filename)) {
-                            return false;
-                        }
-                        if (seenPaths.has(imageData.compressed_path)) {
-                            return false;
-                        }
-                        seenPaths.add(imageData.compressed_path);
-                        return true;
-                    })
+            .then(([videos, images, pickedText]) => {
+                // Process videos
+                const videoItems = videos
+                    .filter(v => v && v.filename && v.subdir && v.preview_path)
+                    .map(v => ({ ...v, type: 'video' }))
                     .sort((a, b) => {
-                        const aIdx = TAG_ORDER.indexOf(a.subdir);
-                        const bIdx = TAG_ORDER.indexOf(b.subdir);
-                        if (aIdx !== bIdx) return aIdx - bIdx;
+                        const ai = TAG_ORDER.indexOf(a.subdir), bi = TAG_ORDER.indexOf(b.subdir);
+                        if (ai !== bi) return ai - bi;
                         return a.filename.localeCompare(b.filename);
                     });
 
+                // Process images
+                const pickedSet = new Set(
+                    pickedText.split(/\r?\n/).map(l => l.trim()).filter(Boolean)
+                );
+                const seenPaths = new Set();
+                const imageItems = images
+                    .filter(img => {
+                        if (!img || !img.filename || !img.subdir || !img.compressed_path || !img.original_path) return false;
+                        if (pickedSet.size > 0 && !pickedSet.has(img.filename)) return false;
+                        if (seenPaths.has(img.compressed_path)) return false;
+                        seenPaths.add(img.compressed_path);
+                        return true;
+                    })
+                    .map(img => ({ ...img, type: 'image' }))
+                    .sort((a, b) => {
+                        const ai = TAG_ORDER.indexOf(a.subdir), bi = TAG_ORDER.indexOf(b.subdir);
+                        if (ai !== bi) return ai - bi;
+                        return a.filename.localeCompare(b.filename);
+                    });
+
+                // Videos first, then images
+                const combined = [...videoItems, ...imageItems];
+
                 gallery.innerHTML = '';
-                if (filteredImages.length === 0) {
-                    gallery.innerHTML = '<p>No picked images found.</p>';
+                if (combined.length === 0) {
+                    gallery.innerHTML = '<p>No media found.</p>';
                     return;
                 }
 
-                buildFilterBar(filteredImages);
+                buildMediaFilterBar(combined);
+                buildTagFilterBar(combined);
 
-                filteredImages.forEach(imageData => {
+                combined.forEach(data => {
                     const item = document.createElement('div');
                     item.className = 'gallery-item';
-                    item.dataset.subdir = imageData.subdir;
+                    item.dataset.subdir = data.subdir;
+                    item.dataset.type = data.type;
 
-                    // Coloured tag badge
+                    // Tag badge
                     const badge = document.createElement('span');
                     badge.className = 'image-tag-badge';
-                    badge.dataset.tag = imageData.subdir;
-                    badge.textContent = TAG_MAP[imageData.subdir] || imageData.subdir;
+                    badge.dataset.tag = data.subdir;
+                    badge.textContent = TAG_MAP[data.subdir] || data.subdir;
                     item.appendChild(badge);
 
-                    const img = document.createElement('img');
-                    img.dataset.src = imageData.compressed_path;
-                    img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-                    img.alt = `${TAG_MAP[imageData.subdir] || imageData.subdir} – ${imageData.filename}`;
-                    img.className = 'lazy';
+                    let lazyEl;
 
-                    img.addEventListener('click', () => {
-                        lightboxImg.src = imageData.compressed_path;
-                        downloadBtn.href = imageData.original_path;
-                        downloadBtn.download = imageData.filename;
-                        lightbox.classList.add('active');
-                    });
+                    if (data.type === 'video') {
+                        // Thumbnail
+                        const thumb = document.createElement('img');
+                        thumb.className = 'lazy';
+                        thumb.dataset.src = data.thumbnail_path;
+                        thumb.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+                        thumb.alt = `${TAG_MAP[data.subdir] || data.subdir} – ${data.filename}`;
+                        item.appendChild(thumb);
+                        lazyEl = thumb;
 
-                    item.appendChild(img);
+                        // Preview video
+                        const preview = document.createElement('video');
+                        preview.muted = true;
+                        preview.loop = true;
+                        preview.playsInline = true;
+                        preview.preload = 'none';
+                        preview.src = data.preview_path;
+                        item.appendChild(preview);
+
+                        // Play icon
+                        const playIcon = document.createElement('div');
+                        playIcon.className = 'play-icon';
+                        item.appendChild(playIcon);
+
+                        // Hover: play preview
+                        item.addEventListener('mouseenter', () => {
+                            preview.currentTime = 0;
+                            preview.play().catch(() => {});
+                        });
+                        item.addEventListener('mouseleave', () => {
+                            preview.pause();
+                        });
+
+                        // Click: YouTube lightbox
+                        item.addEventListener('click', () => {
+                            lightboxImg.classList.add('lb-hidden');
+                            lightboxIframe.classList.remove('lb-hidden');
+                            lightboxIframe.src = data.youtube_url + (data.youtube_url.includes('?') ? '&' : '?') + 'autoplay=1';
+                            downloadBtn.href = data.drive_url;
+                            downloadBtn.removeAttribute('download');
+                            downloadBtn.target = '_blank';
+                            shareButtons.style.display = 'none';
+                            lightbox.classList.add('active');
+                        });
+                    } else {
+                        // Image
+                        const img = document.createElement('img');
+                        img.dataset.src = data.compressed_path;
+                        img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+                        img.alt = `${TAG_MAP[data.subdir] || data.subdir} – ${data.filename}`;
+                        img.className = 'lazy';
+                        item.appendChild(img);
+                        lazyEl = img;
+
+                        // Click: image lightbox
+                        img.addEventListener('click', () => {
+                            lightboxIframe.classList.add('lb-hidden');
+                            lightboxImg.classList.remove('lb-hidden');
+                            lightboxImg.src = data.compressed_path;
+                            downloadBtn.href = data.original_path;
+                            downloadBtn.download = data.filename;
+                            downloadBtn.target = '';
+                            shareButtons.style.display = '';
+                            lightbox.classList.add('active');
+                        });
+                    }
+
                     gallery.appendChild(item);
-                    allItems.push({ el: item, subdir: imageData.subdir, img });
-                    lazyObserver.observe(img);
+                    allItems.push({ el: item, subdir: data.subdir, type: data.type, lazyEl });
+                    lazyObserver.observe(lazyEl);
                 });
+
+                // Apply initial filter from URL param
+                if (activeMediaFilter !== 'all') {
+                    applyFilter();
+                }
             })
             .catch(err => {
                 gallery.innerHTML = `<p style="text-align:center; color: red;">Error loading gallery: ${err.message}</p>`;
@@ -520,12 +704,17 @@
             });
 
         // ── Lightbox controls ────────────────────────────────
-        closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            lightboxIframe.src = '';
+            lightboxImg.src = '';
+        }
+        closeBtn.addEventListener('click', closeLightbox);
         lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) lightbox.classList.remove('active');
+            if (e.target === lightbox) closeLightbox();
         });
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && lightbox.classList.contains('active')) lightbox.classList.remove('active');
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
         });
     });
   </script>
