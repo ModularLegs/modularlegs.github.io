@@ -378,6 +378,75 @@
         width: 100%;
       }
     }
+
+    /* ── Tip banner ── */
+    .gallery-tip-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 0.5em;
+    }
+    .gallery-tip {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 100%;
+      min-width: 0;
+      padding: 10px 16px 10px 16px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(52,152,219,0.07) 0%, rgba(155,89,182,0.07) 100%);
+      border: 1px solid rgba(52,152,219,0.18);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.84rem;
+      color: #555;
+      line-height: 1.65;
+      animation: tipFadeIn 0.6s ease;
+    }
+    @keyframes tipFadeIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .gallery-tip-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3498db, #9b59b6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .gallery-tip-icon i {
+      color: #fff;
+      font-size: 14px;
+    }
+    .gallery-tip-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .gallery-tip-content strong {
+      color: #333;
+    }
+    .gallery-tip ul {
+      margin: 4px 0 0;
+      padding-left: 0.9em;
+      list-style: none;
+    }
+    .gallery-tip ul li {
+      position: relative;
+      padding-left: 2px;
+      margin-bottom: 1px;
+    }
+    .gallery-tip ul li::before {
+      content: '';
+      position: absolute;
+      left: -10px;
+      top: 8px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3498db, #9b59b6);
+    }
   </style>
 
 </head>
@@ -389,6 +458,18 @@
         <a href="index.html" class="back-arrow" title="Back to Home"><img src="assets/previous.png" alt="Back"></a>
         <h1 style="font-family: Michroma; margin: 0;">Agile Legged Locomotion in Reconfigurable Modular Robots</h1>
       </div>
+    </div>
+
+    <div class="gallery-tip-wrapper">
+    <div class="gallery-tip" id="gallery-tip">
+      <div class="gallery-tip-icon"><i class="ti ti-bulb"></i></div>
+      <div class="gallery-tip-content">
+        <ul>
+          <li>Click the media below to view the full screen image / embedded Youtube preview.</li>
+          <li>Below each full screen image/video is a Download Original button that links to the raw file at full resolution.</li>
+        </ul>
+      </div>
+    </div>
     </div>
 
     <div id="media-filter-bar" class="filter-bar">
