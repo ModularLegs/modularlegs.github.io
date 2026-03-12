@@ -42,10 +42,22 @@
     "original_path": "images/evo3/IMG_3800.JPG"
   },
   {
+    "filename": "IMG_2497.JPG",
+    "subdir": "evo4",
+    "compressed_path": "images/compressed/evo4/IMG_2497.JPG",
+    "original_path": "images/evo4/IMG_2497.JPG"
+  },
+  {
     "filename": "IMG_2499.JPG",
     "subdir": "evo4",
     "compressed_path": "images/compressed/evo4/IMG_2499.JPG",
     "original_path": "images/evo4/IMG_2499.JPG"
+  },
+  {
+    "filename": "IMG_2543.JPG",
+    "subdir": "evo4",
+    "compressed_path": "images/compressed/evo4/IMG_2543.JPG",
+    "original_path": "images/evo4/IMG_2543.JPG"
   },
   {
     "filename": "IMG_2612.JPG",
@@ -58,6 +70,12 @@
     "subdir": "evo4",
     "compressed_path": "images/compressed/evo4/IMG_3043.JPG",
     "original_path": "images/evo4/IMG_3043.JPG"
+  },
+  {
+    "filename": "IMG_3246.JPG",
+    "subdir": "evo4",
+    "compressed_path": "images/compressed/evo4/IMG_3246.JPG",
+    "original_path": "images/evo4/IMG_3246.JPG"
   },
   {
     "filename": "IMG_1506.JPG",
