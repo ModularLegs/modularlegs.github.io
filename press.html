@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-S9LZDGEL8N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-S9LZDGEL8N");
+  </script>
+  <meta charset="utf-8" />
+  <title>Press - Agile Legged Locomotion</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+  <link href="assets/favicon.svg" rel="shortcut icon" type="image/x-icon" />
+
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous" />
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    WebFont.load({
+      google: {
+        families: [
+          "Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic",
+          "Michroma",
+          "Open Sans"
+        ],
+      },
+    });
+  </script>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css" />
+  <link href="./css/style.css" rel="stylesheet" type="text/css" />
+
+  <style>
+    .press-header {
+      padding: 2em 0 1em;
+      text-align: center;
+    }
+
+    .press-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .back-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background: none;
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: opacity 0.3s;
+    }
+
+    .back-arrow img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .back-arrow:hover {
+      opacity: 0.6;
+    }
+
+    .press-intro {
+      max-width: 52em;
+      margin: 0 auto 2em;
+      text-align: center;
+      color: #5b6472;
+    }
+
+    .press-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25em;
+      max-width: 52em;
+      margin: 0 auto;
+      padding-bottom: 3em;
+    }
+
+    .press-card {
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: 18px;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+      overflow: hidden;
+    }
+
+    .press-card__content {
+      padding: 1.25em 1.25em 1.4em;
+    }
+
+    .press-card__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      padding: 0.35em 0.8em;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.06);
+      color: #475569;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .press-card__title {
+      margin: 0.85em 0 0.45em;
+      font-family: "Michroma", sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.5;
+      text-align: left;
+    }
+
+    .press-card__summary {
+      margin: 0 0 1.1em;
+      color: #475569;
+    }
+
+    .press-card__embed {
+      padding: 0 1.25em 1.25em;
+    }
+
+    .press-card__embed iframe {
+      width: 100%;
+      display: block;
+      border: 0;
+      border-radius: 14px;
+    }
+
+    .press-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1em;
+      padding: 0 1.25em 1.25em;
+    }
+
+    .press-card__type {
+      color: #64748b;
+      font-size: 0.92rem;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+
+    .press-card__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4em;
+      padding: 0.65em 1em;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      color: #0f172a;
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .press-card__link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+    }
+
+    .press-empty,
+    .press-error {
+      width: 100%;
+      padding: 2em;
+      text-align: center;
+      border-radius: 18px;
+      background: #f8fafc;
+    }
+
+    .press-error {
+      color: #b91c1c;
+    }
+
+    @media (max-width: 640px) {
+      .press-title-row {
+        align-items: flex-start;
+      }
+
+      .press-title-row h1 {
+        font-size: 1.4rem;
+        text-align: left;
+      }
+
+      .press-intro {
+        text-align: left;
+      }
+
+      .press-card__footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="press-header">
+      <div class="press-title-row">
+        <a href="index.html" class="back-arrow" title="Back to Home"><img src="assets/previous.png" alt="Back"></a>
+        <h1 style="font-family: Michroma; margin: 0;">Agile Legged Locomotion in Reconfigurable Modular Robots</h1>
+      </div>
+    </div>
+
+    <p class="press-intro">
+      Interviews, coverage, and external features.
+    </p>
+
+    <div id="press-grid" class="press-grid">
+      <p class="press-empty">Loading press coverage...</p>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const pressGrid = document.getElementById("press-grid");
+
+      function createEmbed(embedHtml) {
+        const wrapper = document.createElement("div");
+        wrapper.className = "press-card__embed";
+
+        const template = document.createElement("template");
+        template.innerHTML = embedHtml.trim();
+        wrapper.appendChild(template.content.cloneNode(true));
+
+        wrapper.querySelectorAll("a").forEach(link => {
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+        });
+
+        return wrapper;
+      }
+
+      fetch("press.json")
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("press.json not found.");
+          }
+          return response.json();
+        })
+        .then(items => {
+          pressGrid.innerHTML = "";
+
+          if (!Array.isArray(items) || items.length === 0) {
+            pressGrid.innerHTML = '<p class="press-empty">No press items found.</p>';
+            return;
+          }
+
+          items.forEach(item => {
+            const card = document.createElement("article");
+            card.className = "press-card";
+
+            const content = document.createElement("div");
+            content.className = "press-card__content";
+            const outletHtml = `<div class="press-card__eyebrow"><i class="ti ti-news"></i>${item.outlet || "Press"}</div>`;
+            const titleHtml = item.title ? `<h2 class="press-card__title">${item.title}</h2>` : "";
+            const summaryHtml = item.summary ? `<p class="press-card__summary">${item.summary}</p>` : "";
+            content.innerHTML = `${outletHtml}${titleHtml}${summaryHtml}`;
+            card.appendChild(content);
+
+            if (item.embed_html) {
+              card.appendChild(createEmbed(item.embed_html));
+            }
+
+            const footer = document.createElement("div");
+            footer.className = "press-card__footer";
+
+            const type = document.createElement("span");
+            type.className = "press-card__type";
+            type.textContent = item.type || "feature";
+            footer.appendChild(type);
+
+            if (item.link) {
+              const link = document.createElement("a");
+              link.className = "press-card__link";
+              link.href = item.link;
+              link.target = "_blank";
+              link.rel = "noopener noreferrer";
+              link.innerHTML = `<span>${item.link_label || "Open"}</span><i class="ti ti-external-link"></i>`;
+              footer.appendChild(link);
+            }
+
+            card.appendChild(footer);
+            pressGrid.appendChild(card);
+          });
+        })
+        .catch(error => {
+          pressGrid.innerHTML = `<p class="press-error">Error loading press items: ${error.message}</p>`;
+          console.error(error);
+        });
+    });
+  </script>
+</body>
+</html>
