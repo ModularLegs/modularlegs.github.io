@@ -706,9 +706,9 @@
                     });
 
                 // Process images
-                const pickedSet = new Set(
-                    pickedText.split(/\r?\n/).map(l => l.trim()).filter(Boolean)
-                );
+                const pickedList = pickedText.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+                const pickedSet = new Set(pickedList);
+                const pickedOrder = new Map(pickedList.map((filename, index) => [filename, index]));
                 const seenPaths = new Set();
                 const imageItems = images
                     .filter(img => {
@@ -722,6 +722,8 @@
                     .sort((a, b) => {
                         const ai = TAG_ORDER.indexOf(a.subdir), bi = TAG_ORDER.indexOf(b.subdir);
                         if (ai !== bi) return ai - bi;
+                        const ap = pickedOrder.get(a.filename), bp = pickedOrder.get(b.filename);
+                        if (ap !== undefined && bp !== undefined && ap !== bp) return ap - bp;
                         return a.filename.localeCompare(b.filename);
                     });
 
