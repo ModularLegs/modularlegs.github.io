@@ -42,6 +42,12 @@
     "original_path": "images/evo3/IMG_3800.JPG"
   },
   {
+    "filename": "3-IMG_3808.JPG",
+    "subdir": "evo3",
+    "compressed_path": "images/compressed/evo3/3-IMG_3808.JPG",
+    "original_path": "images/evo3/3-IMG_3808.JPG"
+  },
+  {
     "filename": "Sequence00_00_23_07.jpg",
     "subdir": "evo4",
     "compressed_path": "images/compressed/evo4/Sequence00_00_23_07.jpg",
@@ -84,6 +90,18 @@
     "original_path": "images/evo4/IMG_3246.JPG"
   },
   {
+    "filename": "4-IMG_3003.JPG",
+    "subdir": "evo4",
+    "compressed_path": "images/compressed/evo4/4-IMG_3003.JPG",
+    "original_path": "images/evo4/4-IMG_3003.JPG"
+  },
+  {
+    "filename": "4-IMG_3456.JPG",
+    "subdir": "evo4",
+    "compressed_path": "images/compressed/evo4/4-IMG_3456.JPG",
+    "original_path": "images/evo4/4-IMG_3456.JPG"
+  },
+  {
     "filename": "IMG_1506.JPG",
     "subdir": "evo5",
     "compressed_path": "images/compressed/evo5/IMG_1506.JPG",
@@ -100,6 +118,24 @@
     "subdir": "evo5",
     "compressed_path": "images/compressed/evo5/IMG_1696.JPG",
     "original_path": "images/evo5/IMG_1696.JPG"
+  },
+  {
+    "filename": "MVI_0239.00_16_56_26.jpg",
+    "subdir": "evo5",
+    "compressed_path": "images/compressed/evo5/MVI_0239.00_16_56_26.jpg",
+    "original_path": "images/evo5/MVI_0239.00_16_56_26.jpg"
+  },
+  {
+    "filename": "5-IMG_0950.jpg",
+    "subdir": "evo5",
+    "compressed_path": "images/compressed/evo5/5-IMG_0950.jpg",
+    "original_path": "images/evo5/5-IMG_0950.jpg"
+  },
+  {
+    "filename": "5-IMG_0972.jpg",
+    "subdir": "evo5",
+    "compressed_path": "images/compressed/evo5/5-IMG_0972.jpg",
+    "original_path": "images/evo5/5-IMG_0972.jpg"
   },
   {
     "filename": "IMG_2029.JPG",
@@ -172,6 +208,12 @@
     "subdir": "quad",
     "compressed_path": "images/compressed/quad/IMG_3816.JPG",
     "original_path": "images/quad/IMG_3816.JPG"
+  },
+  {
+    "filename": "Q-IMG_0396.jpg",
+    "subdir": "quad",
+    "compressed_path": "images/compressed/quad/Q-IMG_0396.jpg",
+    "original_path": "images/quad/Q-IMG_0396.jpg"
   },
   {
     "filename": "IMG_3949.JPG",
