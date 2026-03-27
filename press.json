@@ -12,5 +12,12 @@
     "link": "https://www.youtube.com/watch?v=2xK4uY9IICs",
     "link_label": "Watch on YouTube",
     "embed_html": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/2xK4uY9IICs?si=wfmdLyM8oRJrmAVT\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+  },
+  {
+    "type": "video",
+    "outlet": "Reuters",
+    "link": "https://www.youtube.com/watch?v=-jUiWRV27fo",
+    "link_label": "Watch on YouTube",
+    "embed_html": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/-jUiWRV27fo?si=j8ZeTqhidsfB0xGi\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
   }
 ]
