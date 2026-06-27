@@ -1,5 +1,13 @@
 [
   {
+    "type": "article",
+    "outlet": "BBC Science Focus",
+    "title": "Video: This terrifying, AI-designed robot will never stop chasing you",
+    "summary": "The ‘legged metamachines’ that absolutely will not stop need to be seen to be believed.",
+    "link": "https://www.sciencefocus.com/future-technology/legged-metamachine-robot",
+    "link_label": "Read on BBC Science Focus"
+  },
+  {
     "type": "audio",
     "outlet": "BBC Newshour",
     "link": "https://soundcloud.com/kriegman-lab/bbc-newshour-a-robot-that-can",
