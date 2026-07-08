@@ -138,6 +138,58 @@
       border-radius: 14px;
     }
 
+    .press-card--video .press-card__embed {
+      margin: 0 1.25em 1.25em;
+      padding: 0;
+      overflow: hidden;
+      border-radius: 14px;
+      aspect-ratio: 1200 / 628;
+    }
+
+    .press-card--video .press-card__embed iframe {
+      height: 100%;
+      border-radius: 0;
+    }
+
+    .press-card__cover {
+      position: relative;
+      display: block;
+      margin: 0 1.25em 1.25em;
+      overflow: hidden;
+      border-radius: 14px;
+      background: #e2e8f0;
+      aspect-ratio: 1200 / 628;
+    }
+
+    .press-card__cover img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.25s ease;
+    }
+
+    .press-card__cover:hover img {
+      transform: scale(1.015);
+    }
+
+    .press-card__play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.88);
+      color: #ffffff;
+      font-size: 1.8rem;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.3);
+    }
+
     .press-card__footer {
       display: flex;
       align-items: center;
@@ -245,6 +297,34 @@
         return wrapper;
       }
 
+      function createCover(item) {
+        const cover = document.createElement(item.link ? "a" : "div");
+        cover.className = "press-card__cover";
+
+        if (item.link) {
+          cover.href = item.link;
+          cover.target = "_blank";
+          cover.rel = "noopener noreferrer";
+          cover.setAttribute("aria-label", `Watch ${item.title || "video"} on ${item.outlet || "the publisher's website"}`);
+        }
+
+        const image = document.createElement("img");
+        image.src = item.cover_image;
+        image.alt = item.cover_image_alt || "";
+        image.loading = "eager";
+        cover.appendChild(image);
+
+        if (item.type === "video") {
+          const play = document.createElement("span");
+          play.className = "press-card__play";
+          play.setAttribute("aria-hidden", "true");
+          play.innerHTML = '<i class="ti ti-player-play"></i>';
+          cover.appendChild(play);
+        }
+
+        return cover;
+      }
+
       fetch("press.json")
         .then(response => {
           if (!response.ok) {
@@ -263,6 +343,9 @@
           items.forEach(item => {
             const card = document.createElement("article");
             card.className = "press-card";
+            if (item.type === "video") {
+              card.classList.add("press-card--video");
+            }
 
             const content = document.createElement("div");
             content.className = "press-card__content";
@@ -274,6 +357,10 @@
 
             if (item.embed_html) {
               card.appendChild(createEmbed(item.embed_html));
+            }
+
+            if (item.cover_image) {
+              card.appendChild(createCover(item));
             }
 
             const footer = document.createElement("div");

@@ -27,5 +27,15 @@
     "link": "https://www.youtube.com/watch?v=-jUiWRV27fo",
     "link_label": "Watch on YouTube",
     "embed_html": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/-jUiWRV27fo?si=j8ZeTqhidsfB0xGi\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+  },
+  {
+    "type": "video",
+    "outlet": "SVT Nyheter",
+    "title": "Se robotarna som vägrar ge upp",
+    "summary": "A science feature on AI-designed modular robots that keep moving despite severe damage and adapt to unexpected outdoor conditions.",
+    "cover_image": "https://www.svtstatic.se/image-news/1200/1.91:1/0.45/0.44/fdd8a870bd15381246be7a800f72ed597e3d00af86b53b9f293f1ea1f1d3cefc",
+    "cover_image_alt": "An AI-designed modular robot moving with Lake Michigan and the Chicago skyline in the background.",
+    "link": "https://www.svt.se/nyheter/vetenskap/se-robotarna-som-vagrar-ge-upp",
+    "link_label": "Watch on SVT Nyheter"
   }
 ]
